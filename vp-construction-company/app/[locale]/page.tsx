@@ -1,9 +1,30 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   const t = useTranslations('Home');
+  const projectsTitleRef = useRef(null);
+  const [isProjectsTitleVisible, setIsProjectsTitleVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsProjectsTitleVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (projectsTitleRef.current) {
+      observer.observe(projectsTitleRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const services = [
     {
@@ -40,7 +61,7 @@ export default function Home() {
       
 
       {/* --- HERO SECTION --- */}
-      <header className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <header className="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden">
         {/* Background Image: Sleek glass and steel building */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]"
@@ -51,11 +72,11 @@ export default function Home() {
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-black/20" />
         
         {/* Hero Content */}
-        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto mt-24 flex flex-col items-center">
+        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto mt-20 md:mt-24 flex flex-col items-center">
           <h2 className="text-[#D4AF37] tracking-[0.35em] text-xs md:text-sm font-semibold mb-6 uppercase drop-shadow-lg font-sans">
             {t('heroSubheading')}
           </h2>
-          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-10 leading-[1.1] tracking-tighter drop-shadow-2xl">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-10 leading-[1.1] tracking-tighter drop-shadow-2xl">
             {t('heroHeading1')}<br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37]">
               {t('heroHeading2')}
@@ -69,19 +90,19 @@ export default function Home() {
       </header>
 
       {/* --- SERVICES SECTION --- */}
-      <section className="py-28 bg-zinc-900 border-t border-white/5 relative z-20">
+      <section className="py-20 md:py-28 bg-zinc-900 border-t border-white/5 relative z-20">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 md:mb-20">
             <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-6 text-white font-sans">
               <span dangerouslySetInnerHTML={{ __html: t('servicesTitle').replace('CORE', 'CORE').replace('SERVICES', '<span class="font-bold">SERVICES</span>') }} />
             </h2>
             <div className="w-16 h-[2px] bg-[#D4AF37] mx-auto"></div>
-            <p className="mt-8 text-zinc-400 font-serif max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="mt-8 text-zinc-400 font-serif max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
               {t('servicesSubtitle')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-12">
             {services.map((service, idx) => (
               <div key={idx} className="group flex flex-col items-center text-center p-8 border border-white/5 bg-zinc-800/20 hover:bg-zinc-800/50 transition-colors duration-500">
                 {/* Blueprint technical icon style */}
@@ -103,15 +124,20 @@ export default function Home() {
       </section>
 
       {/* --- FEATURED PROJECTS GALLERY --- */}
-      <section className="py-28 bg-zinc-950">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end">
+      <section className="py-20 md:py-28 bg-zinc-950 overflow-x-hidden">
+        <div
+          ref={projectsTitleRef}
+          className={`max-w-[1440px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-start md:items-end transition-all duration-1000 ease-out ${
+            isProjectsTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <div>
             <h2 className="text-3xl md:text-4xl font-light tracking-wider text-white mb-4">
               <span dangerouslySetInnerHTML={{ __html: t('projectsTitle').replace('FEATURED', 'FEATURED').replace('PROJECTS', '<span class="font-bold">PROJECTS</span>') }} />
             </h2>
             <div className="w-16 h-[2px] bg-[#D4AF37]"></div>
           </div>
-          <button className="text-xs font-bold tracking-[0.2em] text-[#D4AF37] hover:text-white transition-colors uppercase mt-8 md:mt-0 font-sans">
+          <button className="text-xs font-bold tracking-[0.2em] text-[#D4AF37] hover:text-white transition-colors uppercase mt-6 md:mt-0 font-sans">
             {t('projectsButton')}
           </button>
         </div>

@@ -27,10 +27,46 @@ type RootLayoutProps = {
   params: Promise<{ locale: string }>;
 };
 
-// Cấu hình Metadata (Tạm thời cố định, nhưng tiêu đề phù hợp hơn)
+// NÂNG CẤP METADATA ĐỂ CHUẨN SEO
+const siteUrl = 'https://hoanganhgroup.vercel.app';
+
 export const metadata: Metadata = {
-  title: "Hoang Anh Trading & Construction JSC | Building the Future",
-  description: "Hoang Anh Trading & Construction JSC - High-end professional construction services.",
+  // URL cơ sở để tạo các URL tuyệt đối cho các tài nguyên như ảnh
+  metadataBase: new URL(siteUrl),
+
+  // Tiêu đề và mô tả mặc định, có thể được tùy chỉnh ở các trang con
+  title: {
+    default: "Hoang Anh Group | Kiến Tạo Tương Lai, Vững Bền Cùng Thời Gian",
+    template: `%s | Hoang Anh Group`,
+  },
+  description: "Hoang Anh Group - Đơn vị tiên phong trong lĩnh vực xây dựng, thương mại và thí nghiệm công trình. Cung cấp giải pháp toàn diện, chất lượng, và đáng tin cậy.",
+  keywords: ["xây dựng", "thương mại", "Hoang Anh Group", "thí nghiệm công trình", "xây dựng nghệ an", "công ty xây dựng", "Hoàng Anh"],
+
+  // Cấu hình Open Graph (OG) cho việc chia sẻ trên mạng xã hội (Facebook, Zalo,...)
+  openGraph: {
+    title: "Hoang Anh Group | Kiến Tạo Tương Lai, Vững Bền Cùng Thời Gian",
+    description: "Giải pháp toàn diện về xây dựng, thương mại và thí nghiệm công trình.",
+    url: siteUrl,
+    siteName: 'Hoang Anh Group',
+    images: [
+      {
+        url: '/og-image.png', // Đường dẫn đến ảnh trong thư mục /public
+        width: 1200,
+        height: 630,
+        alt: 'Hoang Anh Group - Công ty cổ phần Thương mại và Xây dựng',
+      },
+    ],
+    locale: 'vi_VN',
+    type: 'website',
+  },
+
+  // Cấu hình cho Twitter Card
+  twitter: {
+    card: 'summary_large_image',
+    title: "Hoang Anh Group | Kiến Tạo Tương Lai, Vững Bền Cùng Thời Gian",
+    description: "Giải pháp toàn diện về xây dựng, thương mại và thí nghiệm công trình.",
+    images: [`${siteUrl}/og-image.png`], // Phải là URL tuyệt đối
+  },
 };
 
 export default async function RootLayout({

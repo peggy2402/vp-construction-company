@@ -46,44 +46,38 @@ export const Navbar = () => {
   const locale = useLocale();
   const pathname = usePathname();
 
-  // State for mobile menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // State for hide/show navbar on scroll
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // State for scrolled background effect on desktop
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Requirement 4: Hide/Show Navbar on Scroll
   useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        // Don't hide if mobile menu is open
-        if (isMenuOpen) {
-          setIsVisible(true);
-          return;
-        }
-        // Hide on scroll down, show on scroll up
-        if (window.scrollY > lastScrollY && window.scrollY > 80) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-        setLastScrollY(window.scrollY);
-      }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
     };
-
-    window.addEventListener('scroll', controlNavbar);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', controlNavbar);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollY, isMenuOpen]);
+  }, []);
+
+  // Optional UX Improvement: Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // Thêm đường dẫn href cho từng menu để NavigationLink hoạt động
   const navItems = [
     { key: 'navHome', href: `/${locale}` },
     { key: 'navAbout', href: `/${locale}/about` },
@@ -96,37 +90,40 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-zinc-200 transition-transform duration-300 ease-in-out ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
+        className={`fixed top-0 w-full z-40 transition-colors duration-300 ease-in-out ${
+          // Mobile: always solid white.
+          // Desktop: transparent at top, solid white on scroll.
+          isScrolled
+            ? 'bg-white shadow-sm border-b border-zinc-200'
+            : 'bg-white shadow-sm border-b border-zinc-200 md:bg-transparent md:shadow-none md:border-transparent'
         }`}
       >
-        {/* Requirement 1: Reduced Header Height (py-3) */}
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-3 flex justify-between items-center">
           {/* Logo */}
-          <NavigationLink href={`/${locale}`} className="flex-shrink-0 !gap-3">
+          <NavigationLink href={`/${locale}`} className="flex-shrink-0 !gap-4">
             <Image
               src="/LOGO-TEXT-HA.png"
               alt="Hoang Anh Trading & Construction JSC Logo"
-              width={150} // Slightly smaller logo
+              width={150}
               height={40}
-              className="object-contain"
-              priority // Important for LCP
+              className={`hidden md:block object-contain transition-all duration-300 ${!isScrolled ? 'md:invert' : ''}`}
+              priority
             />
-            <div className="flex flex-col font-bold leading-tight text-zinc-900">
-              <span className="text-xs tracking-wider">HOÀNG ANH</span>
-              <span className="text-[10px] tracking-widest text-zinc-500">GROUP</span>
+            <div className={`flex flex-col font-bold leading-tight transition-colors duration-300 text-zinc-900 ${!isScrolled ? 'md:text-white' : ''}`}>
+              <span className="text-xs md:text-sm tracking-wider">HOÀNG ANH</span>
+              <span className={`text-[10px] md:text-xs tracking-widest transition-colors duration-300 text-zinc-500 ${!isScrolled ? 'md:text-zinc-300' : ''}`}>TRADING & CONSTRUCTION JSC</span>
             </div>
           </NavigationLink>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <ul className="flex space-x-8 text-sm font-medium text-zinc-900">
+            <ul className={`flex space-x-8 text-sm font-medium transition-colors duration-300 text-zinc-900 ${!isScrolled ? 'md:text-white' : ''}`}>
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <li key={item.key} className="relative group">
                     {/* Requirement 3: Hover Effect & 5: Smooth Navigation */}
-                    <NavigationLink href={item.href} className="py-2 block">
+                    <NavigationLink href={item.href} className="py-2 block drop-shadow-sm">
                       {t(item.key)}
                     </NavigationLink>
                     <span
@@ -138,7 +135,7 @@ export const Navbar = () => {
                 );
               })}
             </ul>
-            <div className="border-l border-zinc-300 pl-8">
+            <div className={`border-l pl-8 transition-colors duration-300 border-zinc-300 ${!isScrolled ? 'md:border-white/50' : ''}`}>
               <LanguageSwitcher />
             </div>
           </div>
@@ -156,20 +153,29 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* Requirement 2: Mobile Menu Panel */}
+      {/* Requirement 2 & 5: Mobile Menu (Slide-in Panel & Overlay) */}
+      {/* Overlay */}
       <div
-        className={`md:hidden fixed top-0 right-0 h-full w-full bg-black/50 z-40 transition-opacity duration-300 ${
+        className={`md:hidden fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ease-in-out ${
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
+      {/* Slide-in Panel */}
       <div
-        className={`md:hidden fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white z-40 transform transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed top-0 right-0 h-full w-1/2 bg-white z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="p-8 pt-24 flex flex-col h-full">
-          <ul className="flex flex-col space-y-6 text-lg font-semibold text-zinc-900">
+        <div className="p-8 pt-20 flex flex-col h-full">
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+            className="absolute top-4 right-4 p-2 text-zinc-600 hover:text-zinc-900"
+          >
+            <X size={28} />
+          </button>
+          <ul className="flex flex-col space-y-6 text-lg font-medium text-zinc-900 mt-8">
             {navItems.map((item) => (
               <li key={item.key}>
                 <NavigationLink href={item.href}>{t(item.key)}</NavigationLink>
