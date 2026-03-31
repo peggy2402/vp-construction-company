@@ -61,7 +61,7 @@ export default function About() {
 
             {/* Danh sách dịch vụ */}
             <div className="bg-zinc-800/30 border border-white/5 p-8 md:p-12 rounded-sm">
-              <h3 className="text-xl font-bold tracking-[0.1em] text-white mb-8 uppercase font-sans">Dịch vụ thí nghiệm hiện trường</h3>
+              <h3 className="text-xl font-bold tracking-[0.1em] text-white mb-8 uppercase font-sans">{t('titleServices')}</h3>
               <ul className="space-y-4">
                 {services.map((service, idx) => (
                   <li key={idx} className="flex items-start">
@@ -76,7 +76,7 @@ export default function About() {
           {/* Triết lý / Philosophy */}
           <div className="text-center max-w-4xl mx-auto mb-24">
             <h3 className="text-2xl md:text-3xl font-light tracking-wider text-white mb-8 font-sans">
-              "Mang đến niềm tin về chất lượng"
+              {t('titlePhilosophy')}
             </h3>
             <p className="text-zinc-400 font-serif text-lg md:text-xl leading-relaxed italic">
               {t('philosophy')}
