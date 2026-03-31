@@ -328,6 +328,35 @@ className="min-h-full flex flex-col bg-zinc-900"
 [browser] Image with src "/LOGO-TEXT-HA.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
 "
 
+## TIẾN ĐỘ ĐÃ ĐẠT ĐƯỢC (ĐẾN HIỆN TẠI)
+
+### 1. Cấu hình & Lỗi (Đã fix)
+
+- **Lỗi Hydration Mismatch & Font**: Đã fix triệt để cấu trúc thư mục, xóa bỏ `app/layout.tsx` và `app/page.tsx` thừa. Mọi thứ đã gom về `app/[locale]`.
+- **Lỗi Metadata & SEO**: Đã thiết lập `Metadata` chuẩn cho `layout.tsx` (Open Graph, Twitter Cards).
+- **Lỗi Server Component (useTranslations)**: Đã đổi sang dùng `getTranslations` bên trong `generateMetadata` và các page Server Component (`[slug]/page.tsx`).
+- **Lỗi params.slug (News)**: Đã thêm kiểm tra `params.slug` và wrap logic fetch content an toàn.
+
+### 2. Giao diện & Component
+
+- **Navbar**: Đã tách Component, tích hợp nút Switch Language, hiệu ứng cuộn (header trong suốt chuyển nền trắng/tối), Mobile Menu (Hamburger, trượt từ phải sang 50% màn hình, khóa cuộn `body`).
+- **Hiệu ứng Scroll (Intersection Observer)**: Áp dụng mượt mà hiệu ứng "slide-up & fade-in" cho các khối nội dung trên các trang: `Home`, `About`, `Contact`, `Projects`.
+
+### 3. Các Trang Đã Hoàn Thiện
+
+- **Trang chủ (`/`)**: Fix lệch giao diện, thêm Scroll Animation.
+- **Về chúng tôi (`/about`)**: Tối ưu hiển thị, Scroll Animation.
+- **Dịch vụ (`/services`)**: Layout dạng grid thẻ card với icon mượt mà.
+- **Dự án (`/projects`)**: Giao diện Grid. Thêm **Phân trang (Pagination)**. Truyền link sang chi tiết `[slug]`.
+- **Chi tiết Dự án (`/projects/[slug]`)**: Render thông tin chi tiết dự án theo slug chuẩn SEO.
+- **Tin tức (`/news`)**:
+  - Thiết kế Dark Theme đồng bộ.
+  - Tích hợp **Bộ lọc (Filter by Category)** & **Sắp xếp (Sort by Date)**.
+  - Tích hợp **Phân trang (Pagination)**.
+- **Chi tiết Tin tức (`/news/[slug]`)**: Dùng `tailwindcss-typography` (prose) để hiển thị chi tiết nội dung bài viết.
+- **Liên hệ (`/contact`)**: Form liên hệ Floating Labels siêu đẹp. Tích hợp call API `/api/contact` qua **Discord Webhook**. Có chặn Spam (Rate Limit qua localStorage) và hiệu ứng xoay Loading khi Submit.
+
+**=> Sẵn sàng tiếp tục các tính năng nâng cao vào ngày mai!**
 Cảm ơn bạn nhiều nhé !! Nhưng hiện tại `title` trong phần tôi bôi đen `const projects` có thể chỉnh `title` để đổi theo đúng ngôn ngữ được không ? bổ sung trong folders `messages`
 
 ```typescriptreact
