@@ -24,7 +24,7 @@ const lora = Lora({
 // ĐỊNH NGHĨA TYPE PROPS CHÍNH XÁC (Để xóa bỏ @ts-ignore)
 type RootLayoutProps = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 // Cấu hình Metadata (Tạm thời cố định, nhưng tiêu đề phù hợp hơn)
