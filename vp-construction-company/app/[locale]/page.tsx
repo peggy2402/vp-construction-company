@@ -70,10 +70,10 @@ export default function Home() {
   ];
 
   const projects = [
-    { id: 1, title: "The Onyx Tower", type: "Commercial", image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop" },
-    { id: 2, title: "Lumina Residences", type: "Residential", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
-    { id: 3, title: "Horizon Industrial Park", type: "Industrial", image: "https://images.unsplash.com/photo-1577985043696-8bd54d9f093f?q=80&w=1200&auto=format&fit=crop" },
-    { id: 4, title: "Glass Pavilion Gallery", type: "Renovation", image: "https://images.unsplash.com/photo-1556611802-1815de59dcd8?q=80&w=1200&auto=format&fit=crop" },
+    { id: 1, title: t('project1Title'), type: "Commercial", image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop" },
+    { id: 2, title: t('project2Title'), type: "Residential", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
+    { id: 3, title: t('project3Title'), type: "Industrial", image: "https://images.unsplash.com/photo-1577985043696-8bd54d9f093f?q=80&w=1200&auto=format&fit=crop" },
+    { id: 4, title: t('project4Title'), type: "Renovation", image: "https://nhomkinhgiathai.vn/wp-content/uploads/2024/10/IMG_1113.jpg" },
   ];
 
   return (
@@ -86,10 +86,11 @@ export default function Home() {
             {/* Dùng Logo dạng text theo yêu cầu */}
             <Image
               src="/LOGO-TEXT-HA.png"
-              alt="HA Construction Logo"
+              alt="VP Construction Logo"
               width={160}
               height={50}
               className="object-contain invert"
+              style={{ height: 'auto' }}
             />
           </div>
           <div className="hidden md:flex items-center space-x-6">

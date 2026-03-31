@@ -25,6 +25,10 @@
     "Commercial": "Commercial",
     "Residential": "Residential",
     "Industrial": "Industrial",
-    "Renovation": "Renovation"
+    "Renovation": "Renovation",
+    "project1Title": "The Onyx Tower",
+    "project2Title": "Lumina Residences",
+    "project3Title": "Horizon Industrial Park",
+    "project4Title": "Glass Pavilion Gallery"
   }
 }

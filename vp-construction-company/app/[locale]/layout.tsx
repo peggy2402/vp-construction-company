@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import {NextIntlClientProvider} from 'next-intl';
+import {notFound} from 'next/navigation';
 import { Geist, Lora } from "next/font/google";
 import "../globals.css";
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +26,25 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: {locale: string};
 }>) {
-  const messages = await getMessages();
+  // @ts-ignore - Trusting the runtime error from experimental Next.js
+  const locale = (await params).locale;
+  
+  let messages;
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
  
   return (
     <html
-      lang={params.locale}
+      lang={locale}
       className={`${geistSans.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-zinc-900">
-        <NextIntlClientProvider locale={params.locale} messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
