@@ -34,11 +34,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      return NextResponse.json({ message: 'Failed to send message to Discord.' }, { status: 500 });
+      return NextResponse.json({ message: 'Lỗi khi gửi tin nhắn.' }, { status: 500 });
     }
 
-    return NextResponse.json({ message: 'Message sent successfully!' }, { status: 200 });
+    return NextResponse.json({ message: 'Tin nhắn đã được gửi thành công!' }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: 'An error occurred.' }, { status: 500 });
+    return NextResponse.json({ message: 'Đã có lỗi xảy ra.' }, { status: 500 });
   }
 }
