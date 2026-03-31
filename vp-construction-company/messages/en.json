@@ -1,0 +1,30 @@
+{
+  "Home": {
+    "navHome": "HOME",
+    "navAbout": "ABOUT",
+    "navServices": "SERVICES",
+    "navProjects": "PROJECTS",
+    "navContact": "CONTACT",
+    "navNews": "NEWS",
+    "heroSubheading": "VP Construction Co., Ltd.",
+    "heroHeading1": "BUILDING THE FUTURE,",
+    "heroHeading2": "TODAY.",
+    "heroButton": "EXPLORE OUR PORTFOLIO",
+    "servicesTitle": "CORE SERVICES",
+    "servicesSubtitle": "We bring architectural visions to life with unparalleled precision, cutting-edge technology, and meticulous craftsmanship.",
+    "serviceResidentialTitle": "RESIDENTIAL",
+    "serviceResidentialDesc": "Luxury homes and premium high-rise living spaces engineered for comfort.",
+    "serviceCommercialTitle": "COMMERCIAL",
+    "serviceCommercialDesc": "State-of-the-art office buildings and retail environments that inspire success.",
+    "serviceIndustrialTitle": "INDUSTRIAL",
+    "serviceIndustrialDesc": "Heavy-duty facilities and warehouses built for optimal operational efficiency.",
+    "serviceRenovationTitle": "RENOVATION",
+    "serviceRenovationDesc": "Architectural restoration and modern upgrades with meticulous precision.",
+    "projectsTitle": "FEATURED PROJECTS",
+    "projectsButton": "View All Projects ↗",
+    "Commercial": "Commercial",
+    "Residential": "Residential",
+    "Industrial": "Industrial",
+    "Renovation": "Renovation"
+  }
+}
