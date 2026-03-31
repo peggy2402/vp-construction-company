@@ -1,50 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from 'next-intl';
-import {useLocale} from 'next-intl';
-import {usePathname, useRouter} from 'next/navigation';
-import { useTransition } from 'react';
-
-// --- Language Switcher Component with Flag Icons ---
-const FlagIcon = ({ countryCode }: { countryCode: 'gb' | 'vn' }) => {
-  // Simple SVGs for flags to avoid external dependencies
-  if (countryCode === 'gb') {
-    return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="24" className="h-auto rounded-sm"><clipPath id="a"><path d="M0 0v30h60V0z"/></clipPath><g clipPath="url(#a)"><path fill="#012169" d="M0 0v30h60V0z"/><path stroke="#fff" strokeWidth="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" strokeWidth="4" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" strokeWidth="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" strokeWidth="6" d="M30 0v30M0 15h60"/></g></svg>;
-  }
-  return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="24" className="h-auto rounded-sm"><path fill="#DA251D" d="M0 0h900v600H0z"/><path fill="#FF0" d="M450 150 L523 381 L309 231 L591 231 L377 381 z"/></svg>;
-};
-
-function LanguageSwitcher() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const locale = useLocale();
-  const [isPending, startTransition] = useTransition();
-
-  const changeLocale = (nextLocale: string) => {
-    startTransition(() => {
-      if (!pathname) return;
-      const newPathname = pathname.replace(new RegExp(`^\\/${locale}`), `/${nextLocale}`);
-      router.replace(newPathname);
-    });
-  };
-
-  return (
-    <div className="flex items-center space-x-3 border-l border-zinc-300 pl-6">
-      <button onClick={() => changeLocale('en')} disabled={isPending || locale === 'en'} className="opacity-60 hover:opacity-100 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
-        <FlagIcon countryCode="gb" />
-      </button>
-      <button onClick={() => changeLocale('vi')} disabled={isPending || locale === 'vi'} className="opacity-60 hover:opacity-100 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
-        <FlagIcon countryCode="vn" />
-      </button>
-    </div>
-  );
-}
 
 export default function Home() {
   const t = useTranslations('Home');
-
-  const navItems = ['navHome', 'navAbout', 'navServices', 'navProjects', 'navContact', 'navNews'];
 
   const services = [
     {
@@ -77,34 +36,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-zinc-900 font-sans text-zinc-100 min-h-screen selection:bg-[#D4AF37] selection:text-zinc-900">
+    <div className="bg-zinc-900 text-zinc-100 min-h-screen selection:bg-[#D4AF37] selection:text-zinc-900">
       
-      {/* --- WHITE NAVIGATION --- */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-zinc-200">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
-          <div className="flex-shrink-0 cursor-pointer">
-            {/* Dùng Logo dạng text theo yêu cầu */}
-            <Image
-              src="/LOGO-TEXT-HA.png"
-              alt="VP Construction Logo"
-              width={160}
-              height={50}
-              className="object-contain invert"
-              style={{ height: 'auto' }}
-            />
-          </div>
-          <div className="hidden md:flex items-center space-x-6">
-            <ul className="flex space-x-10 text-[13px] tracking-[0.2em] font-medium text-zinc-900">
-              {navItems.map((item) => (
-                <li key={item} className="hover:text-[#D4AF37] transition-colors duration-300 cursor-pointer">
-                  {t(item)}
-                </li>
-              ))}
-            </ul>
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </nav>
 
       {/* --- HERO SECTION --- */}
       <header className="relative h-screen w-full flex items-center justify-center overflow-hidden">
@@ -139,7 +72,7 @@ export default function Home() {
       <section className="py-28 bg-zinc-900 border-t border-white/5 relative z-20">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-6 text-white">
+            <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-6 text-white font-sans">
               <span dangerouslySetInnerHTML={{ __html: t('servicesTitle').replace('CORE', 'CORE').replace('SERVICES', '<span class="font-bold">SERVICES</span>') }} />
             </h2>
             <div className="w-16 h-[2px] bg-[#D4AF37] mx-auto"></div>
@@ -157,7 +90,9 @@ export default function Home() {
                     {service.icon}
                   </svg>
                 </div>
-                <h3 className="text-sm font-bold tracking-[0.15em] text-white mb-4 uppercase">{service.title}</h3>
+                <h3 className="text-sm font-bold tracking-[0.15em] text-white mb-4 uppercase font-sans">
+                  {service.title}
+                </h3>
                 <p className="text-zinc-400 font-serif text-[15px] leading-relaxed">
                   {service.desc}
                 </p>
