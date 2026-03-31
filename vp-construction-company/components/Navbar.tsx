@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations, useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
 import { NavigationLink } from "./NavigationLink";
+import { Menu, X } from "lucide-react";
 
 // --- Language Switcher Component with Flag Icons ---
 const FlagIcon = ({ countryCode }: { countryCode: 'gb' | 'vn' }) => {
@@ -29,7 +30,7 @@ function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center space-x-3 border-l border-zinc-300 pl-6">
+    <div className="flex items-center space-x-3">
       <button onClick={() => changeLocale('en')} disabled={isPending || locale === 'en'} className="opacity-60 hover:opacity-100 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
         <FlagIcon countryCode="gb" />
       </button>
@@ -43,6 +44,44 @@ function LanguageSwitcher() {
 export const Navbar = () => {
   const t = useTranslations('Home');
   const locale = useLocale();
+  const pathname = usePathname();
+
+  // State for mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // State for hide/show navbar on scroll
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Requirement 4: Hide/Show Navbar on Scroll
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        // Don't hide if mobile menu is open
+        if (isMenuOpen) {
+          setIsVisible(true);
+          return;
+        }
+        // Hide on scroll down, show on scroll up
+        if (window.scrollY > lastScrollY && window.scrollY > 80) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
+        setLastScrollY(window.scrollY);
+      }
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY, isMenuOpen]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   // Thêm đường dẫn href cho từng menu để NavigationLink hoạt động
   const navItems = [
@@ -55,29 +94,93 @@ export const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-zinc-200">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
-        <div className="flex-shrink-0 cursor-pointer">
-          <Image
-            src="/LOGO-TEXT-HA.png"
-            alt="Hoang Anh Trading & Construction JSC Logo"
-            width={160}
-            height={50}
-            className="object-contain"
-            style={{ height: 'auto' }}
-          />
+    <>
+      <nav
+        className={`fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-zinc-200 transition-transform duration-300 ease-in-out ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        {/* Requirement 1: Reduced Header Height (py-3) */}
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-3 flex justify-between items-center">
+          {/* Logo */}
+          <NavigationLink href={`/${locale}`} className="flex-shrink-0 !gap-3">
+            <Image
+              src="/LOGO-TEXT-HA.png"
+              alt="Hoang Anh Trading & Construction JSC Logo"
+              width={150} // Slightly smaller logo
+              height={40}
+              className="object-contain"
+              priority // Important for LCP
+            />
+            <div className="flex flex-col font-bold leading-tight text-zinc-900">
+              <span className="text-xs tracking-wider">HOÀNG ANH</span>
+              <span className="text-[10px] tracking-widest text-zinc-500">GROUP</span>
+            </div>
+          </NavigationLink>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
+            <ul className="flex space-x-8 text-sm font-medium text-zinc-900">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <li key={item.key} className="relative group">
+                    {/* Requirement 3: Hover Effect & 5: Smooth Navigation */}
+                    <NavigationLink href={item.href} className="py-2 block">
+                      {t(item.key)}
+                    </NavigationLink>
+                    <span
+                      className={`absolute bottom-0 left-0 block h-[2px] bg-[#D4AF37] transition-all duration-300 ease-out ${
+                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="border-l border-zinc-300 pl-8">
+              <LanguageSwitcher />
+            </div>
+          </div>
+
+          {/* Requirement 2: Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              className="p-2 text-zinc-900"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-        <div className="hidden md:flex items-center space-x-6">
-          <ul className="flex space-x-10 text-[13px] tracking-[0.2em] font-medium text-zinc-900">
+      </nav>
+
+      {/* Requirement 2: Mobile Menu Panel */}
+      <div
+        className={`md:hidden fixed top-0 right-0 h-full w-full bg-black/50 z-40 transition-opacity duration-300 ${
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+      <div
+        className={`md:hidden fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white z-40 transform transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="p-8 pt-24 flex flex-col h-full">
+          <ul className="flex flex-col space-y-6 text-lg font-semibold text-zinc-900">
             {navItems.map((item) => (
-              <li key={item.key} className="hover:text-[#D4AF37] transition-colors duration-300 cursor-pointer">
+              <li key={item.key}>
                 <NavigationLink href={item.href}>{t(item.key)}</NavigationLink>
               </li>
             ))}
           </ul>
-          <LanguageSwitcher />
+          <div className="mt-auto pt-6 border-t border-zinc-200">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };

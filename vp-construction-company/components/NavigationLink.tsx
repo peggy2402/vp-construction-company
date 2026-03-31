@@ -1,23 +1,24 @@
+import Link from "next/link";
 import React from "react";
 import { LucideIcon } from "lucide-react";
 
 interface NavigationLinkProps {
   href: string;
   icon?: LucideIcon;
-  isActive?: boolean;
-  children: React.ReactNode; // ✅ thêm dòng này
+  children: React.ReactNode;
+  className?: string;
 }
 
 export const NavigationLink: React.FC<NavigationLinkProps> = ({
   href,
   icon: Icon,
-  isActive = false,
   children,
+  className,
 }) => {
   return (
-    <a href={href} className="flex items-center gap-2">
+    <Link href={href} className={`flex items-center gap-2 ${className || ''}`}>
       {Icon && <Icon size={18} />}
       {children}
-    </a>
+    </Link>
   );
 };
