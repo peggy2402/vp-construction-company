@@ -77,5 +77,51 @@
     "diff4": "Reasonable costs, optimized for clients",
     "conclusion": "Through numerous projects nationwide, we are proud to be a trusted partner of many investors, contractors, and reputable consulting firms in the transportation sector.",
     "slogan": "HOANG ANH TRADING AND CONSTRUCTION JOINT STOCK COMPANY – Solid Testing, Building Trust."
+  },
+  "Contact": {
+    "title": "CONTACT US",
+    "subtitle": "Let's connect and build the future together.",
+    "intro": "We are always ready to hear from you. Whether you have questions about our services, need consultation for a project, or want to become a partner, do not hesitate to get in touch.",
+    "infoTitle": "Headquarters Information",
+    "formTitle": "Send Us a Message",
+    "formName": "Full Name",
+    "formEmail": "Email Address",
+    "formPhone": "Phone Number (Optional)",
+    "formMessage": "Your Message",
+    "formButton": "Send Message"
+  },
+  "Projects": {
+    "title": "OUR PROJECTS",
+    "subtitle": "Discover our portfolio of successful projects across various sectors.",
+    "Commercial": "Commercial",
+    "Residential": "Residential",
+    "Industrial": "Industrial",
+    "Renovation": "Renovation",
+    "projectsButton": "View All Projects ↗",
+    "project1Title": "The Onyx Tower",
+    "project2Title": "Lumina Residences",
+    "project3Title": "Horizon Industrial Park",
+    "project4Title": "Glass Pavilion Gallery",
+    "project5Title": "The Vertex Plaza",
+    "project6Title": "Serenity Gardens",
+    "project1Description": "The Onyx Tower is a high-end commercial and residential complex, featuring modern architecture and luxurious amenities. Located in the city center, this project is a symbol of development and prosperity.",
+    "project2Description": "Lumina Residences is a green, peaceful living community, offering an ideal living space for families. With a design that harmonizes with nature, Lumina Residences is a place to settle down and thrive.",
+    "project3Description": "Horizon Industrial Park is a modern manufacturing facility designed to meet the needs of heavy industries. With advanced infrastructure and a strategic location, Horizon is a top choice for businesses.",
+    "project4Description": "Glass Pavilion Gallery is a unique renovation project, transforming an old space into a modern, minimalist glass architecture. It is an ideal space for art events and exhibitions.",
+    "project5Description": "The Vertex Plaza is a bustling commercial and entertainment center, attracting thousands of visitors daily. With high-end shops, diverse restaurants, and entertainment areas, Vertex Plaza is a must-visit destination.",
+    "project6Description": "Serenity Gardens is a high-end residential area with modern villa and townhouse designs, set in a lush, tranquil green space. The project offers comfortable living and closeness to nature."
+  },
+  "News": {
+    "title": "News & Updates",
+    "subtitle": "Stay updated with the latest news from the construction industry and our projects.",
+    "readMore": "Read More",
+    "allCategories": "All Categories",
+    "sortBy": "Sort by",
+    "newest": "Newest",
+    "oldest": "Oldest"
+  },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }

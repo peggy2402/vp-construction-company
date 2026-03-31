@@ -77,5 +77,51 @@
     "diff4": "Chi phí hợp lý, tối ưu cho khách hàng",
     "conclusion": "Trải qua nhiều dự án lớn nhỏ trên khắp cả nước, chúng tôi tự hào là đối tác tin cậy của nhiều chủ đầu tư, nhà thầu và đơn vị tư vấn uy tín trong ngành giao thông.",
     "slogan": "CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ XÂY DỰNG HOÀNG ANH – Kiểm định vững chắc, kiến tạo niềm tin."
+  },
+  "Contact": {
+    "title": "LIÊN HỆ",
+    "subtitle": "Hãy kết nối và cùng nhau xây dựng tương lai.",
+    "intro": "Chúng tôi luôn sẵn sàng lắng nghe từ bạn. Dù bạn có câu hỏi về dịch vụ, cần tư vấn cho dự án, hay muốn trở thành đối tác, đừng ngần ngại liên hệ.",
+    "infoTitle": "Thông Tin Trụ Sở",
+    "formTitle": "Gửi Tin Nhắn Cho Chúng Tôi",
+    "formName": "Họ và Tên",
+    "formEmail": "Địa chỉ Email",
+    "formPhone": "Số Điện Thoại (Tùy chọn)",
+    "formMessage": "Nội dung tin nhắn",
+    "formButton": "Gửi Tin Nhắn"
+  },
+  "Projects": {
+    "title": "DỰ ÁN NỔI BẬT",
+    "subtitle": "Khám phá một số dự án tiêu biểu mà chúng tôi đã thực hiện, thể hiện cam kết về chất lượng và sự xuất sắc trong xây dựng.",
+    "Commercial": "Thương mại",
+    "Residential": "Nhà ở",
+    "Industrial": "Công nghiệp",
+    "Renovation": "Cải tạo",
+    "projectsButton": "Xem Tất Cả Dự Án ↗",
+    "project1Title": "Tháp Onyx",
+    "project2Title": "Khu dân cư Lumina",
+    "project3Title": "Khu công nghiệp Horizon",
+    "project4Title": "Phòng trưng bày Glass Pavilion",
+    "project5Title": "Quảng trường Vertex",
+    "project6Title": "Vườn Serenity",
+    "project1Description": "Tháp Onyx là một dự án phức hợp thương mại và dân cư cao cấp, nổi bật với kiến trúc hiện đại và tiện ích sang trọng. Tọa lạc tại trung tâm thành phố, dự án này là biểu tượng của sự phát triển và thịnh vượng.",
+    "project2Description": "Khu dân cư Lumina là một cộng đồng sống xanh, yên bình, mang đến không gian sống lý tưởng cho các gia đình. Với thiết kế hài hòa với thiên nhiên, Lumina Residences là nơi an cư lạc nghiệp.",
+    "project3Description": "Khu công nghiệp Horizon là một cơ sở sản xuất hiện đại, được thiết kế để đáp ứng nhu cầu của các ngành công nghiệp nặng. Với hạ tầng tiên tiến và vị trí chiến lược, Horizon là lựa chọn hàng đầu cho các doanh nghiệp.",
+    "project4Description": "Phòng trưng bày Glass Pavilion là một dự án cải tạo độc đáo, biến một không gian cũ thành một kiến trúc kính hiện đại, tối giản. Đây là không gian lý tưởng cho các sự kiện nghệ thuật và trưng bày.",
+    "project5Description": "Quảng trường Vertex là một trung tâm thương mại và giải trí sầm uất, thu hút hàng ngàn lượt khách mỗi ngày. Với các cửa hàng cao cấp, nhà hàng đa dạng và khu vui chơi giải trí, Vertex Plaza là điểm đến không thể bỏ qua.",
+    "project6Description": "Vườn Serenity là một khu dân cư cao cấp với thiết kế biệt thự và nhà phố hiện đại, nằm trong một không gian xanh mát, yên tĩnh. Dự án mang đến cuộc sống tiện nghi và gần gũi với thiên nhiên."
+  },
+  "News": {
+    "title": "Tin Tức & Cập Nhật",
+    "subtitle": "Cập nhật những tin tức mới nhất về ngành xây dựng và các dự án của chúng tôi.",
+    "readMore": "Đọc thêm",
+    "allCategories": "Tất cả danh mục",
+    "sortBy": "Sắp xếp theo",
+    "newest": "Mới nhất",
+    "oldest": "Cũ nhất"
+  },
+  "Pagination": {
+    "previous": "Trước",
+    "next": "Sau"
   }
 }

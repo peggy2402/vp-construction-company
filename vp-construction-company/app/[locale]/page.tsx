@@ -6,21 +6,35 @@ import { useEffect, useRef, useState } from 'react';
 export default function Home() {
   const t = useTranslations('Home');
   const projectsTitleRef = useRef(null);
+  const servicesSectionRef = useRef(null);
+  const projectsGridRef = useRef(null);
   const [isProjectsTitleVisible, setIsProjectsTitleVisible] = useState(false);
+  const [isServicesVisible, setIsServicesVisible] = useState(false);
+  const [isProjectsGridVisible, setIsProjectsGridVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsProjectsTitleVisible(true);
-          observer.unobserve(entry.target);
-        }
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (entry.target === projectsTitleRef.current) setIsProjectsTitleVisible(true);
+            if (entry.target === servicesSectionRef.current) setIsServicesVisible(true);
+            if (entry.target === projectsGridRef.current) setIsProjectsGridVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
       },
       { threshold: 0.1 }
     );
 
     if (projectsTitleRef.current) {
       observer.observe(projectsTitleRef.current);
+    }
+    if (servicesSectionRef.current) {
+      observer.observe(servicesSectionRef.current);
+    }
+    if (projectsGridRef.current) {
+      observer.observe(projectsGridRef.current);
     }
 
     return () => observer.disconnect();
@@ -90,8 +104,13 @@ export default function Home() {
       </header>
 
       {/* --- SERVICES SECTION --- */}
-      <section className="py-20 md:py-28 bg-zinc-900 border-t border-white/5 relative z-20">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+      <section
+        ref={servicesSectionRef}
+        className={`py-20 md:py-28 bg-zinc-900 border-t border-white/5 relative z-20 transition-all duration-1000 ease-out ${
+          isServicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12" >
           <div className="text-center mb-16 md:mb-20">
             <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-6 text-white font-sans">
               <span dangerouslySetInnerHTML={{ __html: t('servicesTitle').replace('CORE', 'CORE').replace('SERVICES', '<span class="font-bold">SERVICES</span>') }} />
@@ -143,7 +162,12 @@ export default function Home() {
         </div>
 
         {/* Image Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 w-full">
+        <div
+          ref={projectsGridRef}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-1 w-full transition-opacity duration-1000 ease-out delay-300 ${
+            isProjectsGridVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
           {projects.map((project) => (
             <div key={project.id} className="relative aspect-[4/3] group overflow-hidden bg-zinc-900 cursor-pointer">
               <img 

@@ -1,9 +1,38 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 
 export default function About() {
   const t = useTranslations('About');
+
+  // --- Scroll Animation Logic ---
+  const introRef = useRef(null);
+  const philosophyRef = useRef(null);
+  const diffRef = useRef(null);
+  const conclusionRef = useRef(null);
+  const [isIntroVisible, setIntroVisible] = useState(false);
+  const [isPhilosophyVisible, setPhilosophyVisible] = useState(false);
+  const [isDiffVisible, setDiffVisible] = useState(false);
+  const [isConclusionVisible, setConclusionVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === introRef.current) setIntroVisible(true);
+            if (entry.target === philosophyRef.current) setPhilosophyVisible(true);
+            if (entry.target === diffRef.current) setDiffVisible(true);
+            if (entry.target === conclusionRef.current) setConclusionVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 }
+    );
+    [introRef, philosophyRef, diffRef, conclusionRef].forEach(ref => ref.current && observer.observe(ref.current));
+    return () => observer.disconnect();
+  }, []);
 
   const services = [
     t('service1'),
@@ -44,10 +73,13 @@ export default function About() {
       </header>
 
       {/* --- MAIN CONTENT SECTION --- */}
-      <section className="py-20 bg-zinc-900 relative z-20">
+      <section className="py-20 bg-zinc-900 relative z-20 overflow-x-hidden">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+          <div
+            ref={introRef}
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24 transition-all duration-1000 ease-out ${isIntroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             {/* Giới thiệu */}
             <div>
               <div className="w-16 h-[2px] bg-[#D4AF37] mb-8"></div>
@@ -74,7 +106,10 @@ export default function About() {
           </div>
 
           {/* Triết lý / Philosophy */}
-          <div className="text-center max-w-4xl mx-auto mb-24">
+          <div
+            ref={philosophyRef}
+            className={`text-center max-w-4xl mx-auto mb-24 transition-all duration-1000 ease-out ${isPhilosophyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <h3 className="text-2xl md:text-3xl font-light tracking-wider text-white mb-8 font-sans">
               {t('titlePhilosophy')}
             </h3>
@@ -84,7 +119,10 @@ export default function About() {
           </div>
 
           {/* Điểm khác biệt / Differences */}
-          <div className="mb-24">
+          <div
+            ref={diffRef}
+            className={`mb-24 transition-all duration-1000 ease-out ${isDiffVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <h3 className="text-2xl font-bold tracking-[0.1em] text-center text-white mb-12 uppercase font-sans">
               {t('diffTitle')}
             </h3>
@@ -103,7 +141,10 @@ export default function About() {
           </div>
 
           {/* Kết luận & Slogan */}
-          <div className="bg-[#D4AF37] text-zinc-950 p-12 md:text-center rounded-sm relative overflow-hidden">
+          <div
+            ref={conclusionRef}
+            className={`bg-[#D4AF37] text-zinc-950 p-12 md:text-center rounded-sm relative overflow-hidden transition-all duration-1000 ease-out ${isConclusionVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+          >
             <div className="relative z-10 max-w-4xl mx-auto">
               <p className="text-lg font-serif mb-6 opacity-90">
                 {t('conclusion')}
