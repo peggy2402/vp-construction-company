@@ -10,10 +10,12 @@ export default function About() {
   const introRef = useRef(null);
   const philosophyRef = useRef(null);
   const diffRef = useRef(null);
+  const galleryRef = useRef(null);
   const conclusionRef = useRef(null);
   const [isIntroVisible, setIntroVisible] = useState(false);
   const [isPhilosophyVisible, setPhilosophyVisible] = useState(false);
   const [isDiffVisible, setDiffVisible] = useState(false);
+  const [isGalleryVisible, setGalleryVisible] = useState(false);
   const [isConclusionVisible, setConclusionVisible] = useState(false);
 
   useEffect(() => {
@@ -24,13 +26,14 @@ export default function About() {
             if (entry.target === introRef.current) setIntroVisible(true);
             if (entry.target === philosophyRef.current) setPhilosophyVisible(true);
             if (entry.target === diffRef.current) setDiffVisible(true);
+            if (entry.target === galleryRef.current) setGalleryVisible(true);
             if (entry.target === conclusionRef.current) setConclusionVisible(true);
             observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.1 }
     );
-    [introRef, philosophyRef, diffRef, conclusionRef].forEach(ref => ref.current && observer.observe(ref.current));
+    [introRef, philosophyRef, diffRef, galleryRef, conclusionRef].forEach(ref => ref.current && observer.observe(ref.current));
     return () => observer.disconnect();
   }, []);
 
@@ -137,6 +140,64 @@ export default function About() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* --- GALLERY SECTION: CERTIFICATES & EQUIPMENT --- */}
+          <div
+            ref={galleryRef}
+            className={`mb-24 transition-all duration-1000 ease-out ${isGalleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
+            <div className="text-center mb-12">
+              <h3 className="text-2xl md:text-3xl font-bold tracking-[0.1em] text-white uppercase font-sans mb-4">
+                {t('galleryTitle')}
+              </h3>
+              <div className="w-16 h-[2px] bg-[#D4AF37] mx-auto"></div>
+            </div>
+
+            {/* Certificates */}
+            <div className="mb-16">
+              <h4 className="text-xl text-[#D4AF37] font-serif mb-8 text-center">{t('certSubtitle')}</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  { src: '/CC-ISO-NGUYENDINHHANH.jpg', alt: t('certHanh') },
+                  { src: '/CC-ISO-NGUYENNHUCANH.jpg', alt: t('certCanh') },
+                  { src: '/CC-ISO-Thong2.jpg', alt: t('certThong') },
+                ].map((cert, idx) => (
+                  <div key={idx} className="group relative aspect-[3/4] overflow-hidden rounded-sm border border-white/10 bg-zinc-800">
+                    <img src={cert.src} alt={cert.alt} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 text-center">
+                      <p className="text-white font-semibold tracking-wider">{cert.alt}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Equipment */}
+            <div>
+              <h4 className="text-xl text-[#D4AF37] font-serif mb-8 text-center">{t('equipSubtitle')}</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {[
+                  { src: '/may-PIT.jpg', alt: t('equipPIT'), pdf: '/may-PIT.pdf' },
+                  { src: '/PDA-Hà-lan-Hoang-Anh.jpg', alt: t('equipPDA'), pdf: '/PDA-Hà-lan.pdf' },
+                ].map((equip, idx) => (
+                  <div key={idx} className="group flex flex-col items-center">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm border border-white/10 bg-zinc-800 mb-4 shadow-lg">
+                      <img src={equip.src} alt={equip.alt} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <h5 className="text-lg font-bold text-white mb-2 text-center">{equip.alt}</h5>
+                    {equip.pdf && (
+                      <a href={equip.pdf} target="_blank" rel="noopener noreferrer" className="text-sm text-[#D4AF37] hover:text-[#f2ce5e] transition-colors flex items-center gap-2 mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        {t('viewPdf')}
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

@@ -8,9 +8,11 @@ export default function Home() {
   const projectsTitleRef = useRef(null);
   const servicesSectionRef = useRef(null);
   const projectsGridRef = useRef(null);
+  const certificationsRef = useRef(null);
   const [isProjectsTitleVisible, setIsProjectsTitleVisible] = useState(false);
   const [isServicesVisible, setIsServicesVisible] = useState(false);
   const [isProjectsGridVisible, setIsProjectsGridVisible] = useState(false);
+  const [isCertificationsVisible, setIsCertificationsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -20,6 +22,7 @@ export default function Home() {
             if (entry.target === projectsTitleRef.current) setIsProjectsTitleVisible(true);
             if (entry.target === servicesSectionRef.current) setIsServicesVisible(true);
             if (entry.target === projectsGridRef.current) setIsProjectsGridVisible(true);
+            if (entry.target === certificationsRef.current) setIsCertificationsVisible(true);
             observer.unobserve(entry.target);
           }
         });
@@ -35,6 +38,9 @@ export default function Home() {
     }
     if (projectsGridRef.current) {
       observer.observe(projectsGridRef.current);
+    }
+    if (certificationsRef.current) {
+      observer.observe(certificationsRef.current);
     }
 
     return () => observer.disconnect();
@@ -68,6 +74,13 @@ export default function Home() {
     { id: 2, title: t('project2Title'), type: "Residential", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
     { id: 3, title: t('project3Title'), type: "Industrial", image: "https://images.unsplash.com/photo-1577985043696-8bd54d9f093f?q=80&w=1200&auto=format&fit=crop" },
     { id: 4, title: t('project4Title'), type: "Renovation", image: "https://nhomkinhgiathai.vn/wp-content/uploads/2024/10/IMG_1113.jpg" },
+  ];
+
+  const certifications = [
+    { title: t('cert1Title'), desc: t('cert1Desc') },
+    { title: t('cert2Title'), desc: t('cert2Desc') },
+    { title: t('cert3Title'), desc: t('cert3Desc') },
+    { title: t('cert4Title'), desc: t('cert4Desc') },
   ];
 
   return (
@@ -187,6 +200,38 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* --- CERTIFICATIONS SECTION --- */}
+      <section
+        ref={certificationsRef}
+        className={`py-20 md:py-28 bg-zinc-900 border-t border-white/5 transition-all duration-1000 ease-out ${
+          isCertificationsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-light tracking-wider text-white mb-4 uppercase">
+            {t('certTitle')}
+          </h2>
+          <div className="w-16 h-[2px] bg-[#D4AF37] mx-auto mb-6"></div>
+          <p className="text-zinc-400 font-serif max-w-2xl mx-auto mb-16 text-base md:text-lg leading-relaxed">
+            {t('certSubtitle')}
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {certifications.map((cert, idx) => (
+              <div key={idx} className="p-8 border border-white/10 bg-zinc-800/30 hover:bg-zinc-800/80 transition-colors flex flex-col items-center justify-center group rounded-sm">
+                <div className="w-16 h-16 mb-6 rounded-full border border-[#D4AF37] flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-zinc-900 transition-all duration-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-white mb-3 tracking-wide">{cert.title}</h3>
+                <p className="text-[15px] text-zinc-400 font-serif leading-relaxed">{cert.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

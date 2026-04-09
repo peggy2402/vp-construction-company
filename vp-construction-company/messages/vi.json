@@ -29,7 +29,17 @@
     "project1Title": "Tháp Onyx",
     "project2Title": "Khu dân cư Lumina",
     "project3Title": "Khu công nghiệp Horizon",
-    "project4Title": "Phòng trưng bày Glass Pavilion"
+    "project4Title": "Phòng trưng bày Glass Pavilion",
+    "certTitle": "CHỨNG NHẬN & GIẢI THƯỞNG",
+    "certSubtitle": "Cam kết đạt tiêu chuẩn cao nhất về chất lượng, an toàn và hiệu quả vận hành.",
+    "cert1Title": "LAS-XD 40.009",
+    "cert1Desc": "Phòng Thí nghiệm Vật liệu Xây dựng được cấp phép",
+    "cert2Title": "ISO 9001:2015",
+    "cert2Desc": "Chứng nhận Hệ thống Quản lý Chất lượng",
+    "cert3Title": "ISO 45001:2018",
+    "cert3Desc": "Hệ thống Quản lý An toàn & Sức khỏe Nghề nghiệp",
+    "cert4Title": "ISO 14001:2015",
+    "cert4Desc": "Hệ thống Quản lý Môi trường"
   },
 
   "Footer": {
@@ -76,7 +86,16 @@
     "diff3": "Dịch vụ chuyên nghiệp – tận tâm",
     "diff4": "Chi phí hợp lý, tối ưu cho khách hàng",
     "conclusion": "Trải qua nhiều dự án lớn nhỏ trên khắp cả nước, chúng tôi tự hào là đối tác tin cậy của nhiều chủ đầu tư, nhà thầu và đơn vị tư vấn uy tín trong ngành giao thông.",
-    "slogan": "CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ XÂY DỰNG HOÀNG ANH – Kiểm định vững chắc, kiến tạo niềm tin."
+    "slogan": "CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ XÂY DỰNG HOÀNG ANH – Kiểm định vững chắc, kiến tạo niềm tin.",
+    "galleryTitle": "NĂNG LỰC & THIẾT BỊ",
+    "certSubtitle": "Chứng chỉ chuyên môn của đội ngũ",
+    "equipSubtitle": "Trang thiết bị thí nghiệm hiện trường",
+    "viewPdf": "Xem tài liệu (PDF)",
+    "certHanh": "Chứng chỉ ISO - Nguyễn Đình Hạnh",
+    "certCanh": "Chứng chỉ ISO - Nguyễn Như Cảnh",
+    "certThong": "Chứng chỉ ISO - Bùi Văn Thống",
+    "equipPIT": "THIẾT BỊ BIẾN DẠNG NHỎ PIT",
+    "equipPDA": "THIẾT BỊ THÍ NGHIỆM BIẾN DẠNG LỚN PDA (Hà Lan)"
   },
   "Contact": {
     "title": "LIÊN HỆ",

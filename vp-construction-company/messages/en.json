@@ -29,7 +29,17 @@
     "project1Title": "The Onyx Tower",
     "project2Title": "Lumina Residences",
     "project3Title": "Horizon Industrial Park",
-    "project4Title": "Glass Pavilion Gallery"
+    "project4Title": "Glass Pavilion Gallery",
+    "certTitle": "OUR CERTIFICATIONS",
+    "certSubtitle": "Committed to the highest standards of quality, safety, and operational excellence.",
+    "cert1Title": "LAS-XD 40.009",
+    "cert1Desc": "Certified Building Materials Testing Laboratory",
+    "cert2Title": "ISO 9001:2015",
+    "cert2Desc": "Quality Management System Certification",
+    "cert3Title": "ISO 45001:2018",
+    "cert3Desc": "Occupational Health and Safety Management",
+    "cert4Title": "ISO 14001:2015",
+    "cert4Desc": "Environmental Management System"
   },
 
   "Footer": {
@@ -76,7 +86,16 @@
     "diff3": "Professional and dedicated service",
     "diff4": "Reasonable costs, optimized for clients",
     "conclusion": "Through numerous projects nationwide, we are proud to be a trusted partner of many investors, contractors, and reputable consulting firms in the transportation sector.",
-    "slogan": "HOANG ANH TRADING AND CONSTRUCTION JOINT STOCK COMPANY – Solid Testing, Building Trust."
+    "slogan": "HOANG ANH TRADING AND CONSTRUCTION JOINT STOCK COMPANY – Solid Testing, Building Trust.",
+    "galleryTitle": "CAPACITY & EQUIPMENT",
+    "certSubtitle": "Professional certificates of our engineering team",
+    "equipSubtitle": "Modern on-site testing equipment",
+    "viewPdf": "View document (PDF)",
+    "certHanh": "ISO Certificate - Nguyen Dinh Hanh",
+    "certCanh": "ISO Certificate - Nguyen Nhu Canh",
+    "certThong": "ISO Certificate - Bui Van Thong",
+    "equipPIT": "PIT Small Deformation Testing Equipment",
+    "equipPDA": "PDA Large Deformation Testing Equipment (Netherlands)"
   },
   "Contact": {
     "title": "CONTACT US",
