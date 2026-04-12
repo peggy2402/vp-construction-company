@@ -1,239 +1,250 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+
 
 export default function Home() {
-  const t = useTranslations('Home');
-  const projectsTitleRef = useRef(null);
-  const servicesSectionRef = useRef(null);
-  const projectsGridRef = useRef(null);
-  const certificationsRef = useRef(null);
-  const [isProjectsTitleVisible, setIsProjectsTitleVisible] = useState(false);
-  const [isServicesVisible, setIsServicesVisible] = useState(false);
-  const [isProjectsGridVisible, setIsProjectsGridVisible] = useState(false);
-  const [isCertificationsVisible, setIsCertificationsVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Thêm state cho mobile menu
+  const tHome = useTranslations('Home');
+  const tAbout = useTranslations('About');
+  const tProjects = useTranslations('Projects');
+  const tFooter = useTranslations('Footer');
+  const tNews = useTranslations('News');
+  // Dữ liệu Dự án nổi bật
+  const projectItems = [
+    { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('projectTuyenQuangAlt') },
+    { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('projectTinhHucAlt') }
+  ];
 
+  // Dữ liệu Hình ảnh công trường (BẠN ĐỔI ẢNH THỨ 2 Ở ĐÂY NHÉ)
+  const constructionItems = [
+    { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('constructionImage1') },
+    { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('constructionImage2') }
+  ];
+
+  // Xử lý scroll cho Header và nút Back to top
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (entry.target === projectsTitleRef.current) setIsProjectsTitleVisible(true);
-            if (entry.target === servicesSectionRef.current) setIsServicesVisible(true);
-            if (entry.target === projectsGridRef.current) setIsProjectsGridVisible(true);
-            if (entry.target === certificationsRef.current) setIsCertificationsVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (projectsTitleRef.current) {
-      observer.observe(projectsTitleRef.current);
-    }
-    if (servicesSectionRef.current) {
-      observer.observe(servicesSectionRef.current);
-    }
-    if (projectsGridRef.current) {
-      observer.observe(projectsGridRef.current);
-    }
-    if (certificationsRef.current) {
-      observer.observe(certificationsRef.current);
-    }
-
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const services = [
-    {
-      title: t('serviceResidentialTitle'),
-      desc: t('serviceResidentialDesc'),
-      icon: <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-    },
-    {
-      title: t('serviceCommercialTitle'),
-      desc: t('serviceCommercialDesc'),
-      icon: <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-    },
-    {
-      title: t('serviceIndustrialTitle'),
-      desc: t('serviceIndustrialDesc'),
-      icon: <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
-    },
-    {
-      title: t('serviceRenovationTitle'),
-      desc: t('serviceRenovationDesc'),
-      icon: <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h12M6 12h12M6 18h12m-6-6v6m0-12v6" />
-    }
-  ];
-
-  const projects = [
-    { id: 1, title: t('project1Title'), type: "Commercial", image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop" },
-    { id: 2, title: t('project2Title'), type: "Residential", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
-    { id: 3, title: t('project3Title'), type: "Industrial", image: "https://images.unsplash.com/photo-1577985043696-8bd54d9f093f?q=80&w=1200&auto=format&fit=crop" },
-    { id: 4, title: t('project4Title'), type: "Renovation", image: "https://nhomkinhgiathai.vn/wp-content/uploads/2024/10/IMG_1113.jpg" },
-  ];
-
-  const certifications = [
-    { title: t('cert1Title'), desc: t('cert1Desc') },
-    { title: t('cert2Title'), desc: t('cert2Desc') },
-    { title: t('cert3Title'), desc: t('cert3Desc') },
-    { title: t('cert4Title'), desc: t('cert4Desc') },
-  ];
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <div className="bg-zinc-900 text-zinc-100 min-h-screen selection:bg-[#D4AF37] selection:text-zinc-900">
+    <div className="bg-white text-gray-800 font-sans min-h-screen relative">
       
 
       {/* --- HERO SECTION --- */}
-      <header className="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden">
-        {/* Background Image: Sleek glass and steel building */}
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')" }}
-        />
-        {/* Overlays for cinematic deep contrast */}
-        <div className="absolute inset-0 z-10 bg-slate-900/50 mix-blend-multiply" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-black/20" />
-        
-        {/* Hero Content */}
-        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto mt-20 md:mt-24 flex flex-col items-center">
-          <h2 className="text-[#D4AF37] tracking-[0.35em] text-xs md:text-sm font-semibold mb-6 uppercase drop-shadow-lg font-sans">
-            {t('heroSubheading')}
-          </h2>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-10 leading-[1.1] tracking-tighter drop-shadow-2xl">
-            {t('heroHeading1')}<br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37]">
-              {t('heroHeading2')}
-            </span>
-          </h1>
-          <button className="group relative px-8 py-4 bg-[#D4AF37] hover:bg-[#b5952f] text-zinc-950 font-bold tracking-[0.15em] text-[13px] transition-all duration-300 overflow-hidden">
-            <span className="relative z-10">{t('heroButton')}</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-          </button>
-        </div>
-      </header>
+      <section className="pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-40 lg:pb-24 max-w-[1400px] mx-auto px-4 lg:px-8 overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative">
+          
+          {/* Background watermark */}
+          <div className="absolute left-0 top-0 opacity-5 pointer-events-none z-0 overflow-hidden w-full">
+            <h1 className="text-[60px] md:text-[80px] lg:text-[120px] font-black leading-none whitespace-nowrap">HOÀNG ANH</h1>
+          </div>
 
-      {/* --- SERVICES SECTION --- */}
-      <section
-        ref={servicesSectionRef}
-        className={`py-20 md:py-28 bg-zinc-900 border-t border-white/5 relative z-20 transition-all duration-1000 ease-out ${
-          isServicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12" >
-          <div className="text-center mb-16 md:mb-20">
-            <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-6 text-white font-sans">
-              <span dangerouslySetInnerHTML={{ __html: t('servicesTitle').replace('CORE', 'CORE').replace('SERVICES', '<span class="font-bold">SERVICES</span>') }} />
-            </h2>
-            <div className="w-16 h-[2px] bg-[#D4AF37] mx-auto"></div>
-            <p className="mt-8 text-zinc-400 font-serif max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-              {t('servicesSubtitle')}
+          {/* Left Content */}
+          <div className="w-full lg:w-1/2 z-10">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-800 mb-4 sm:mb-6 leading-tight uppercase">
+              {tHome('heroSubheading')}
+            </h1>
+            <p className="text-gray-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed">
+              {tAbout('intro2')}
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-12">
-            {services.map((service, idx) => (
-              <div key={idx} className="group flex flex-col items-center text-center p-8 border border-white/5 bg-zinc-800/20 hover:bg-zinc-800/50 transition-colors duration-500">
-                {/* Blueprint technical icon style */}
-                <div className="mb-6 p-4 rounded-full bg-slate-800/50 text-[#D4AF37] group-hover:scale-110 transition-transform duration-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-10 h-10">
-                    {service.icon}
-                  </svg>
+            
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 shrink-0 rounded-full border-2 border-green-500 flex items-center justify-center text-green-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                 </div>
-                <h3 className="text-sm font-bold tracking-[0.15em] text-white mb-4 uppercase font-sans">
-                  {service.title}
-                </h3>
-                <p className="text-zinc-400 font-serif text-[15px] leading-relaxed">
-                  {service.desc}
-                </p>
+                <span className="font-bold text-lg sm:text-xl">{tHome('serviceTestMaterial')}</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- FEATURED PROJECTS GALLERY --- */}
-      <section className="py-20 md:py-28 bg-zinc-950 overflow-x-hidden">
-        <div
-          ref={projectsTitleRef}
-          className={`max-w-[1440px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-start md:items-end transition-all duration-1000 ease-out ${
-            isProjectsTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          <div>
-            <h2 className="text-3xl md:text-4xl font-light tracking-wider text-white mb-4">
-              <span dangerouslySetInnerHTML={{ __html: t('projectsTitle').replace('FEATURED', 'FEATURED').replace('PROJECTS', '<span class="font-bold">PROJECTS</span>') }} />
-            </h2>
-            <div className="w-16 h-[2px] bg-[#D4AF37]"></div>
-          </div>
-          <button className="text-xs font-bold tracking-[0.2em] text-[#D4AF37] hover:text-white transition-colors uppercase mt-6 md:mt-0 font-sans">
-            {t('projectsButton')}
-          </button>
-        </div>
-
-        {/* Image Grid */}
-        <div
-          ref={projectsGridRef}
-          className={`grid grid-cols-1 md:grid-cols-2 gap-1 w-full transition-opacity duration-1000 ease-out delay-300 ${
-            isProjectsGridVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          {projects.map((project) => (
-            <div key={project.id} className="relative aspect-[4/3] group overflow-hidden bg-zinc-900 cursor-pointer">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="object-cover w-full h-full opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="absolute bottom-0 left-0 p-8 md:p-12 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <span className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mb-2 block drop-shadow-md">
-                  {t(project.type as any)}
-                </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-                  {project.title}
-                </h3>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 shrink-0 rounded-full border-2 border-green-500 flex items-center justify-center text-green-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <span className="font-bold text-lg sm:text-xl">{tHome('serviceInspect')}</span>
               </div>
             </div>
-          ))}
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-gray-50 p-3 sm:p-2 rounded-3xl sm:rounded-full w-full sm:w-max shadow-sm border border-gray-100">
+              <button className="w-full sm:w-auto bg-blue-800 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-900 transition uppercase tracking-wide text-sm sm:text-base whitespace-nowrap">
+                {tHome('fastContact')}
+              </button>
+              <div className="flex items-center justify-center gap-2 pr-0 sm:pr-6 pb-2 sm:pb-0">
+                <div className="bg-green-600 text-white p-2 shrink-0 rounded-full">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clipRule="evenodd" /></svg>
+                </div>
+                <span className="font-bold text-xl sm:text-2xl">{tFooter('phoneNumber')}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image Composition (Responsive version) */}
+          <div className="w-full lg:w-1/2 relative h-[320px] sm:h-[450px] lg:h-[500px] mt-6 lg:mt-0">
+             <div className="absolute right-0 top-0 w-[80%] h-[200px] sm:h-[280px] lg:h-[320px] bg-blue-100 rounded-lg overflow-hidden border-4 border-white shadow-xl rotate-2 z-10">
+                <img src="/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg" className="w-full h-full object-cover" alt={tHome('constructionImage1')} />
+             </div>
+             <div className="absolute left-0 lg:left-auto lg:right-24 top-[100px] sm:top-[160px] lg:top-[180px] w-[80%] h-[200px] sm:h-[280px] lg:h-[320px] bg-gray-200 rounded-lg overflow-hidden border-4 border-blue-800 shadow-xl z-20">
+                <img src="/du-an-cau-tinh-huc.jpg" className="w-full h-full object-cover" alt={tHome('constructionImage2')} />
+             </div>
+          </div>
         </div>
       </section>
 
-      {/* --- CERTIFICATIONS SECTION --- */}
-      <section
-        ref={certificationsRef}
-        className={`py-20 md:py-28 bg-zinc-900 border-t border-white/5 transition-all duration-1000 ease-out ${
-          isCertificationsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-light tracking-wider text-white mb-4 uppercase">
-            {t('certTitle')}
-          </h2>
-          <div className="w-16 h-[2px] bg-[#D4AF37] mx-auto mb-6"></div>
-          <p className="text-zinc-400 font-serif max-w-2xl mx-auto mb-16 text-base md:text-lg leading-relaxed">
-            {t('certSubtitle')}
-          </p>
+      {/* --- VỀ SÔNG HỒNG --- */}
+      <section className="py-12 sm:py-16 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+          <SectionTitle title={tAbout('title')} />
+          
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mt-8 sm:mt-10">
+            <div className="w-full lg:w-1/2 space-y-4 text-gray-700 text-justify text-sm sm:text-base">
+              <p>{tAbout('intro1_part1')}</p>
+              <p>{tAbout('intro1_part2')}</p>
+              <p>{tAbout('intro1_part3')}</p>
+              <p>{tAbout('intro2')}</p>
+            </div>
+            <div className="w-full lg:w-1/2">
+              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop" alt="Công trình xây dựng" className="w-full h-auto object-cover rounded shadow-md" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert, idx) => (
-              <div key={idx} className="p-8 border border-white/10 bg-zinc-800/30 hover:bg-zinc-800/80 transition-colors flex flex-col items-center justify-center group rounded-sm">
-                <div className="w-16 h-16 mb-6 rounded-full border border-[#D4AF37] flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-zinc-900 transition-all duration-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+      {/* --- LÝ DO NÊN CHỌN & HÌNH ẢNH --- */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 flex flex-col lg:flex-row gap-12">
+          {/* Lý do */}
+          <div className="w-full lg:w-1/2">
+            <SectionTitle title={tHome('whyChooseUs')} align="left" />
+            <div className="mt-8 sm:mt-10 space-y-6 sm:space-y-8">
+              <div>
+                <h4 className="text-red-600 font-bold text-base sm:text-lg uppercase flex items-center gap-2">
+                  <span className="text-xl">—</span> {tHome('reason1Title')}
+                </h4>
+                <p className="mt-2 text-gray-600 text-sm sm:text-base">{tHome('reason1Desc')}</p>
+              </div>
+              <div>
+                <h4 className="text-red-600 font-bold text-base sm:text-lg uppercase flex items-center gap-2">
+                  <span className="text-xl">—</span> {tHome('reason2Title')}
+                </h4>
+                <p className="mt-2 text-gray-600 text-sm sm:text-base">{tHome('reason2Desc')}</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Hình ảnh công trường */}
+          <div className="w-full lg:w-1/2 overflow-hidden">
+             <SectionTitle title={tHome('constructionImages')} align="left" />
+             
+             {/* Lưới Hình ảnh công trường */}
+             <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {constructionItems.map((item, i) => (
+                  <div key={i} className="aspect-[4/3] rounded-lg shadow-md overflow-hidden border border-gray-100">
+                    <img src={item.src} className="w-full h-full object-cover hover:scale-105 transition-transform" alt={item.alt} />
+                  </div>
+                ))}
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- TIN TỨC NỔI BẬT --- */}
+      <section className="py-12 sm:py-16 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+          <SectionTitle title={tNews('title')} />
+          
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Tin 1 */}
+            <div className="bg-white rounded overflow-hidden shadow-sm hover:shadow-md transition">
+              <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=600&auto=format&fit=crop" className="w-full h-48 sm:h-56 object-cover" alt="Tin tức" />
+              <div className="p-4 sm:p-6">
+                <h3 className="font-bold text-gray-800 mb-2 sm:mb-3 text-sm uppercase line-clamp-2">{tNews('news1Title')}</h3>
+                <p className="text-gray-600 text-xs sm:text-sm line-clamp-3">{tNews('news1Desc')}</p>
+              </div>
+            </div>
+            {/* Tin 2 */}
+            <div className="bg-white rounded overflow-hidden shadow-sm hover:shadow-md transition">
+              <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?q=80&w=600&auto=format&fit=crop" className="w-full h-48 sm:h-56 object-cover" alt="Tin tức" />
+              <div className="p-4 sm:p-6">
+                <h3 className="font-bold text-gray-800 mb-2 sm:mb-3 text-sm uppercase line-clamp-2">{tNews('news2Title')}</h3>
+                <p className="text-gray-600 text-xs sm:text-sm line-clamp-3">{tNews('news2Desc')}</p>
+              </div>
+            </div>
+            {/* Tin 3 */}
+            <div className="bg-white rounded overflow-hidden shadow-sm hover:shadow-md transition">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop" className="w-full h-48 sm:h-56 object-cover" alt="Tin tức" />
+              <div className="p-4 sm:p-6">
+                <h3 className="font-bold text-gray-800 mb-2 sm:mb-3 text-sm uppercase line-clamp-2">{tNews('news3Title')}</h3>
+                <p className="text-gray-600 text-xs sm:text-sm line-clamp-3">{tNews('news3Desc')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- SLIDER DỰ ÁN NỔI BẬT --- */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+          <SectionTitle title={tProjects('title')} />
+          
+          {/* Lưới Dự án đã thực hiện */}
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {projectItems.map((item, i) => (
+              <div key={i} className="aspect-video bg-gray-200 rounded-xl overflow-hidden shadow-lg relative group cursor-pointer border border-gray-100">
+                <img 
+                  src={item.src} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-in-out" 
+                  alt={item.alt} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-0 p-6 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                   <h3 className="text-white text-xl sm:text-2xl font-bold drop-shadow-md">{item.alt}</h3>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-3 tracking-wide">{cert.title}</h3>
-                <p className="text-[15px] text-zinc-400 font-serif leading-relaxed">{cert.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* --- FLOATING ACTION BUTTONS --- */}
+      <div className="fixed bottom-6 right-4 md:bottom-10 md:right-6 flex flex-col gap-3 z-[99]">
+        <a href="https://zalo.me/0383886368" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition pointer-events-auto">
+          <span className="font-bold text-xs sm:text-sm">Zalo</span>
+        </a>
+        <a href={`tel:${tFooter('phoneNumber')}`} className="w-10 h-10 sm:w-12 sm:h-12 bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition animate-bounce pointer-events-auto">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6"><path fillRule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clipRule="evenodd" /></svg>
+        </a>
+        {scrolled && (
+          <button onClick={scrollToTop} className="w-8 h-8 sm:w-10 sm:h-10 mt-2 sm:mt-4 bg-gray-500/50 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
+          </button>
+        )}
+      </div>
+
+    </div>
+  );
+}
+
+// Component nhỏ hỗ trợ render tiêu đề Section có viền trang trí
+function SectionTitle({ title, align = 'center' }: { title: string, align?: 'center' | 'left' }) {
+  return (
+    <div className={`flex flex-col ${align === 'center' ? 'items-center text-center' : 'items-start text-left'}`}>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-800 uppercase tracking-wide">
+        {title}
+      </h2>
+      <div className="flex items-center gap-2 mt-2 sm:mt-3">
+         <div className="h-[1px] w-8 sm:w-12 bg-gray-300"></div>
+         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 border border-gray-400 rotate-45"></div>
+         <div className="h-[1px] w-8 sm:w-12 bg-gray-300"></div>
+      </div>
     </div>
   );
 }

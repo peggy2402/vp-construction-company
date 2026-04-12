@@ -90,15 +90,11 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-40 transition-colors duration-300 ease-in-out ${
-          // Mobile: always solid white.
-          // Desktop: transparent at top, solid white on scroll.
-          isScrolled
-            ? 'bg-white shadow-sm border-b border-zinc-200'
-            : 'bg-white shadow-sm border-b border-zinc-200 md:bg-transparent md:shadow-none md:border-transparent'
+        className={`fixed top-0 w-full z-40 bg-white transition-all duration-300 ease-in-out border-b border-zinc-200 ${
+          isScrolled ? 'shadow-md py-1' : 'shadow-sm py-3'
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-3 flex justify-between items-center">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex justify-between items-center">
           {/* Logo */}
           <NavigationLink href={`/${locale}`} className="flex-shrink-0 !gap-4">
             <Image
@@ -109,15 +105,15 @@ export const Navbar = () => {
               className="hidden md:block object-contain h-auto transition-all duration-300"
               priority
             />
-            <div className={`flex flex-col font-bold leading-tight transition-colors duration-300 text-zinc-900 ${!isScrolled ? 'md:text-white' : ''}`}>
+            <div className="flex flex-col font-bold leading-tight transition-colors duration-300 text-zinc-900">
               <span className="text-xs md:text-sm tracking-wider">HOÀNG ANH</span>
-              <span className={`text-[10px] md:text-xs tracking-widest transition-colors duration-300 text-zinc-500 ${!isScrolled ? 'md:text-zinc-300' : ''}`}>TRADING & CONSTRUCTION JSC</span>
+              <span className="text-[10px] md:text-xs tracking-widest transition-colors duration-300 text-zinc-500">TRADING & CONSTRUCTION JSC</span>
             </div>
           </NavigationLink>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <ul className={`flex space-x-8 text-sm font-medium transition-colors duration-300 text-zinc-900 ${!isScrolled ? 'md:text-white' : ''}`}>
+            <ul className="flex space-x-8 text-sm font-medium transition-colors duration-300 text-zinc-900">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -135,7 +131,7 @@ export const Navbar = () => {
                 );
               })}
             </ul>
-            <div className={`border-l pl-8 transition-colors duration-300 border-zinc-300 ${!isScrolled ? 'md:border-white/50' : ''}`}>
+            <div className="border-l pl-8 transition-colors duration-300 border-zinc-300">
               <LanguageSwitcher />
             </div>
           </div>

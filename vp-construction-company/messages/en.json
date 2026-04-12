@@ -39,7 +39,20 @@
     "cert3Title": "ISO 45001:2018",
     "cert3Desc": "Occupational Health and Safety Management",
     "cert4Title": "ISO 14001:2015",
-    "cert4Desc": "Environmental Management System"
+    "cert4Desc": "Environmental Management System",
+    "fastContact": "CONTACT US NOW",
+    "whyChooseUs": "WHY CHOOSE US",
+    "constructionImages": "CONSTRUCTION IMAGES",
+    "reason1Title": "Highly Skilled Team – Accurate Results",
+    "reason1Desc": "We have a team of experienced engineers in building materials testing and quality inspection for transportation infrastructure, industrial, and civil construction projects, ensuring accurate and objective evaluation results.",
+    "reason2Title": "Modern Equipment",
+    "reason2Desc": "We apply advanced machinery and testing methods that fully meet current technical standards and regulations.",
+    "serviceTestMaterial": "Materials Testing",
+    "serviceInspect": "Construction Inspection",
+    "constructionImage1": "Construction Image 1",
+    "constructionImage2": "Construction Image 2",
+    "projectTuyenQuangAlt": "Tuyen Quang - Ha Giang Expressway Project",
+    "projectTinhHucAlt": "Tinh Huc Bridge Project"
   },
 
   "Footer": {
@@ -70,7 +83,9 @@
   "About": {
     "title": "ABOUT US",
     "subtitle": "SOLID TESTING, BUILDING TRUST.",
-    "intro1": "In the context of rapidly developing transportation infrastructure, construction quality is not just a requirement – it is a critical factor for success. Understanding this, HOANG ANH TRADING AND CONSTRUCTION JOINT STOCK COMPANY was established with the mission of becoming a leading provider in the field of on-site testing for transportation projects, delivering accurate, fast, and reliable inspection solutions.",
+    "intro1_part1": "Hoang Anh Trading & Construction JSC - LAS-XD 40.009 Building Materials Laboratory is a leading entity in Vietnam's Trading and Construction industry, specializing in on-site testing services for transportation infrastructure projects nationwide.",
+    "intro1_part2": "With a team of highly experienced engineers, professionally trained and supported by modern equipment and machinery, we provide a full range of on-site testing services, including:",
+    "intro1_part3": "- Road foundation and subgrade testing\n- Soil compaction and moisture testing\n- On-site concrete and asphalt testing\n- Pile testing (PDA, PIT, static load testing, etc.)\n- Monitoring and quality inspection of construction works",
     "intro2": "With a team of highly experienced engineers, professionally trained and supported by modern equipment and machinery, we provide a full range of on-site testing services, including:",
     "titleServices": "On-Site Testing Services",
     "service1": "Road foundation and subgrade testing",
@@ -128,7 +143,9 @@
     "project3Description": "Horizon Industrial Park is a modern manufacturing facility designed to meet the needs of heavy industries. With advanced infrastructure and a strategic location, Horizon is a top choice for businesses.",
     "project4Description": "Glass Pavilion Gallery is a unique renovation project, transforming an old space into a modern, minimalist glass architecture. It is an ideal space for art events and exhibitions.",
     "project5Description": "The Vertex Plaza is a bustling commercial and entertainment center, attracting thousands of visitors daily. With high-end shops, diverse restaurants, and entertainment areas, Vertex Plaza is a must-visit destination.",
-    "project6Description": "Serenity Gardens is a high-end residential area with modern villa and townhouse designs, set in a lush, tranquil green space. The project offers comfortable living and closeness to nature."
+    "project6Description": "Serenity Gardens is a high-end residential area with modern villa and townhouse designs, set in a lush, tranquil green space. The project offers comfortable living and closeness to nature.",
+    "projectTuyenQuangTitle": "Tuyen Quang - Ha Giang Expressway Project",
+    "projectTinhHucTitle": "Tinh Huc Bridge Project"
   },
   "News": {
     "title": "News & Updates",
@@ -137,7 +154,13 @@
     "allCategories": "All Categories",
     "sortBy": "Sort by",
     "newest": "Newest",
-    "oldest": "Oldest"
+    "oldest": "Oldest",
+    "news1Title": "Certification of conformity for building materials according to national technical regulation QCVN 16:2023/BXD",
+    "news1Desc": "1. Overview of QCVN 16:2023/BXD Issuance: The regulation was issued by the Ministry of Construction under Circular No. 09/2023/TT-BXD dated...",
+    "news2Title": "Why is construction monitoring necessary?",
+    "news2Desc": "1. Ensuring the safety of the structure and people. Helps in early detection of deformations, displacements, settlements,...",
+    "news3Title": "Why is it necessary to prepare an estimate for a construction project?",
+    "news3Desc": "1. Determine the total required investment cost. An estimate helps the investor know how much..."
   },
   "Pagination": {
     "previous": "Previous",

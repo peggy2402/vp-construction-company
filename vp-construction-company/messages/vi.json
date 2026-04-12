@@ -39,7 +39,20 @@
     "cert3Title": "ISO 45001:2018",
     "cert3Desc": "Hệ thống Quản lý An toàn & Sức khỏe Nghề nghiệp",
     "cert4Title": "ISO 14001:2015",
-    "cert4Desc": "Hệ thống Quản lý Môi trường"
+    "cert4Desc": "Hệ thống Quản lý Môi trường",
+    "fastContact": "Liên hệ ngay",
+    "whyChooseUs": "Lý do nên chọn chúng tôi",
+    "constructionImages": "Hình ảnh công trường",
+    "reason1Title": "Đội ngũ chuyên môn cao – Kết quả chính xác",
+    "reason1Desc": "Sở hữu đội ngũ kỹ sư giàu kinh nghiệm trong thí nghiệm vật liệu xây dựng và kiểm định chất lượng công trình giao thông dân dụng, công nghiệp,... đảm bảo kết quả đánh giá chính xác và khách quan.",
+    "reason2Title": "Thiết bị hiện đại",
+    "reason2Desc": "Ứng dụng máy móc và phương pháp kiểm định tiên tiến, đáp ứng đầy đủ các tiêu chuẩn kỹ thuật và quy chuẩn hiện hành.",
+    "serviceTestMaterial": "Thí nghiệm VLXD",
+    "serviceInspect": "Kiểm định xây dựng",
+    "constructionImage1": "Hình ảnh công trường 1",
+    "constructionImage2": "Hình ảnh công trường 2",
+    "projectTuyenQuangAlt": "Dự án Cao tốc Tuyên Quang - Hà Giang",
+    "projectTinhHucAlt": "Dự án Cầu Tình Húc"
   },
 
   "Footer": {
@@ -70,7 +83,9 @@
   "About": {
     "title": "VỀ CHÚNG TÔI",
     "subtitle": "KIỂM ĐỊNH VỮNG CHẮC, KIẾN TẠO NIỀM TIN.",
-    "intro1": "Trong bối cảnh hạ tầng giao thông ngày càng phát triển mạnh mẽ, chất lượng công trình không chỉ là yêu cầu – mà là yếu tố sống còn. Hiểu rõ điều đó, CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ XÂY DỰNG HOÀNG ANH ra đời với sứ mệnh trở thành đơn vị tiên phong trong lĩnh vực thí nghiệm hiện trường công trình giao thông, mang đến giải pháp kiểm định chính xác – nhanh chóng – đáng tin cậy.",
+    "intro1_part1": "Công ty cổ phần Thương mại và xây dựng Hoàng Anh hoạt động chuyên sâu trong các lĩnh vực thí nghiệm các công trình sửa chữa cầu đường bộ, xây dựng công trình đường bộ và thử nghiệm các đặc tính của vật liệu xây dựng công trình. Với sự kết hợp giữa đội ngũ kỹ sư xây dựng dày dặn kinh nghiệm và phòng thí nghiệm chuyên ngành xây dựng LAS – XD 40.009, chúng tôi tự hào mang đến các giải pháp xây dựng toàn diện, an toàn và bền vững. Chúng tôi không chỉ xây dựng công trình, chúng tôi kiểm soát chất lượng từ cốt lõi.",
+    "intro1_part2": "Phòng thí nghiệm chuyên ngành xây dựng LAS-XD 40.009 có đội ngũ cán bộ kỹ thuật được đào tạo các chuyên ngành xây dựng, giao thông, thủy lợi, vật liệu xây dựng, có trình độ chuyên môn, năng động, nhiệt tình và đã tham gia thực hiện nhiều dự án xây dựng quy mô lớn. Phòng thí nghiệm được trang bị hệ thống máy móc thiết bị thí nghiệm hiện đại, đáp ứng các yêu cầu kỹ thuật theo tiêu chuẩn hiện hành.",
+    "intro1_part3": "Phòng thí nghiệm chuyên ngành xây dựng, với đầy đủ trang thiết bị hiện đại, Giấy chứng nhận đăng ký kinh doanh số: 2901084471 do phòng đăng ký kinh doanh - Sở tài chính tỉnh Nghệ An cấp ngày 28 tháng 05 năm 2009, đăng ký thay đổi lần thứ 4, ngày 02 tháng 07 năm 2025 của Phòng Đăng ký kinh doanh – Sở tài chính tỉnh Nghệ An cấp và giấy chứng nhận đủ điều kiện hoạt động chuyên ngành xây dựng số: 3557/GCN-SXD ngày 19 tháng 08 năm 2024. Phòng luôn thực hiện, duy trì, và liên tục cải tiến Hệ thống Quản lý Chất lượng của công ty trên nền tảng tiêu chuẩn Quốc tế ISO 9001:2015 và tiêu chuẩn ISO/IEC 17025:2017 trong hoạt động thử nghiệm.",
     "intro2": "Với đội ngũ kỹ sư giàu kinh nghiệm, được đào tạo chuyên sâu cùng hệ thống máy móc, thiết bị hiện đại, chúng tôi cung cấp đầy đủ các dịch vụ thí nghiệm hiện trường như:",
     "titleServices": "Dịch vụ thí nghiệm hiện trường",
     "service1": "Thí nghiệm nền, móng đường",
@@ -128,7 +143,9 @@
     "project3Description": "Khu công nghiệp Horizon là một cơ sở sản xuất hiện đại, được thiết kế để đáp ứng nhu cầu của các ngành công nghiệp nặng. Với hạ tầng tiên tiến và vị trí chiến lược, Horizon là lựa chọn hàng đầu cho các doanh nghiệp.",
     "project4Description": "Phòng trưng bày Glass Pavilion là một dự án cải tạo độc đáo, biến một không gian cũ thành một kiến trúc kính hiện đại, tối giản. Đây là không gian lý tưởng cho các sự kiện nghệ thuật và trưng bày.",
     "project5Description": "Quảng trường Vertex là một trung tâm thương mại và giải trí sầm uất, thu hút hàng ngàn lượt khách mỗi ngày. Với các cửa hàng cao cấp, nhà hàng đa dạng và khu vui chơi giải trí, Vertex Plaza là điểm đến không thể bỏ qua.",
-    "project6Description": "Vườn Serenity là một khu dân cư cao cấp với thiết kế biệt thự và nhà phố hiện đại, nằm trong một không gian xanh mát, yên tĩnh. Dự án mang đến cuộc sống tiện nghi và gần gũi với thiên nhiên."
+    "project6Description": "Vườn Serenity là một khu dân cư cao cấp với thiết kế biệt thự và nhà phố hiện đại, nằm trong một không gian xanh mát, yên tĩnh. Dự án mang đến cuộc sống tiện nghi và gần gũi với thiên nhiên.",
+    "projectTuyenQuangTitle": "Dự án Cao tốc Tuyên Quang - Hà Giang",
+    "projectTinhHucTitle": "Dự án Cầu Tình Húc"
   },
   "News": {
     "title": "Tin Tức & Cập Nhật",
@@ -137,7 +154,13 @@
     "allCategories": "Tất cả danh mục",
     "sortBy": "Sắp xếp theo",
     "newest": "Mới nhất",
-    "oldest": "Cũ nhất"
+    "oldest": "Cũ nhất",
+    "news1Title": "Chứng nhận hợp quy vật liệu xây dựng theo quy chuẩn kỹ thuật quốc gia QCVN 16:2023/BXD",
+    "news1Desc": "1. Tổng quan về QCVN 16:2023/BXD Ban hành: Quy chuẩn được Bộ Xây dựng ban hành theo Thông tư số 09/2023/TT-BXD ngày...",
+    "news2Title": "Vì sao cần quan trắc công trình?",
+    "news2Desc": "1. Đảm bảo an toàn công trình và con người Giúp phát hiện sớm các biến dạng, dịch chuyển, lún,...",
+    "news3Title": "Vì sao phải lập dự toán cho công trình xây dựng?",
+    "news3Desc": "1. Xác định tổng chi phí đầu tư cần thiết Dự toán giúp chủ đầu tư biết được cần bao nhiêu..."
   },
   "Pagination": {
     "previous": "Trước",

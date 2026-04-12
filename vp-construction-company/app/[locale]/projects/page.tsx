@@ -41,15 +41,8 @@ export default function ProjectsPage() {
 
   // This would typically come from a CMS or database
   const allProjects = [
-    { id: 1, slug: 'the-onyx-tower', title: tProjects('project1Title'), type: "Commercial", image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop" },
-    { id: 2, slug: 'lumina-residences', title: tProjects('project2Title'), type: "Residential", image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200&auto=format&fit=crop" },
-    { id: 3, slug: 'horizon-industrial-park', title: tProjects('project3Title'), type: "Industrial", image: "https://images.unsplash.com/photo-1577985043696-8bd54d9f093f?q=80&w=1200&auto=format&fit=crop" },
-    { id: 4, slug: 'glass-pavilion-gallery', title: tProjects('project4Title'), type: "Renovation", image: "https://nhomkinhgiathai.vn/wp-content/uploads/2024/10/IMG_1113.jpg" },
-    // Add more projects here
-    { id: 5, slug: 'the-vertex-plaza', title: tProjects('project5Title'), type: "Commercial", image: "https://tse1.mm.bing.net/th/id/OIP.Z3ZoNaVZxpMyUsALpnfM9AHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" },
-    { id: 6, slug: 'serenity-gardens', title: tProjects('project6Title'), type: "Residential", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
-    { id: 7, slug: 'project-7', title: t('project1Title'), type: "Commercial", image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200&auto=format&fit=crop" },
-    { id: 8, slug: 'project-8', title: t('project2Title'), type: "Residential", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" },
+    { id: 1, slug: 'du-an-cao-toc-tuyen-quang-ha-giang', title: tProjects('projectTuyenQuangTitle'), type: "Industrial", image: "/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg" },
+    { id: 2, slug: 'du-an-cau-tinh-huc', title: tProjects('projectTinhHucTitle'), type: "Commercial", image: "/du-an-cau-tinh-huc.jpg" }
   ];
 
   // Pagination logic

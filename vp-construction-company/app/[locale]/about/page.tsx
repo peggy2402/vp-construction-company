@@ -87,7 +87,13 @@ export default function About() {
             <div>
               <div className="w-16 h-[2px] bg-[#D4AF37] mb-8"></div>
               <p className="text-lg md:text-xl text-zinc-300 font-serif leading-relaxed mb-6">
-                {t('intro1')}
+                {t('intro1_part1')}
+              </p>
+              <p className="text-zinc-400 font-serif leading-relaxed mb-6">
+                {t('intro1_part2')}
+              </p>
+              <p className="text-zinc-400 font-serif leading-relaxed mb-6">
+                {t('intro1_part3')}
               </p>
               <p className="text-zinc-400 font-serif leading-relaxed">
                 {t('intro2')}
