@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useEffect, useState, useRef } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Thêm state cho mobile menu
+  const locale = useLocale();
   const tHome = useTranslations('Home');
   const tAbout = useTranslations('About');
   const tProjects = useTranslations('Projects');
@@ -14,8 +16,8 @@ export default function Home() {
   const tNews = useTranslations('News');
   // Dữ liệu Dự án nổi bật
   const projectItems = [
-    { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('projectTuyenQuangAlt') },
-    { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('projectTinhHucAlt') }
+    { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('projectTuyenQuangAlt'), slug: 'du-an-cao-toc-tuyen-quang-ha-giang' },
+    { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('projectTinhHucAlt'), slug: 'du-an-cau-tinh-huc' }
   ];
 
   // Dữ liệu Hình ảnh công trường (BẠN ĐỔI ẢNH THỨ 2 Ở ĐÂY NHÉ)
@@ -23,6 +25,43 @@ export default function Home() {
     { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('constructionImage1') },
     { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('constructionImage2') }
   ];
+
+  // --- Scroll Animation Logic ---
+  const heroRef = useRef(null);
+  const aboutRef = useRef(null);
+  const whyRef = useRef(null);
+  const newsRef = useRef(null);
+  const projectsRef = useRef(null);
+
+  const [isHeroVisible, setHeroVisible] = useState(false);
+  const [isAboutVisible, setAboutVisible] = useState(false);
+  const [isWhyVisible, setWhyVisible] = useState(false);
+  const [isNewsVisible, setNewsVisible] = useState(false);
+  const [isProjectsVisible, setProjectsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === heroRef.current) setHeroVisible(true);
+            if (entry.target === aboutRef.current) setAboutVisible(true);
+            if (entry.target === whyRef.current) setWhyVisible(true);
+            if (entry.target === newsRef.current) setNewsVisible(true);
+            if (entry.target === projectsRef.current) setProjectsVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    [heroRef, aboutRef, whyRef, newsRef, projectsRef].forEach(
+      (ref) => ref.current && observer.observe(ref.current)
+    );
+
+    return () => observer.disconnect();
+  }, []);
 
   // Xử lý scroll cho Header và nút Back to top
   useEffect(() => {
@@ -43,7 +82,10 @@ export default function Home() {
 
       {/* --- HERO SECTION --- */}
       <section className="pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-40 lg:pb-24 max-w-[1400px] mx-auto px-4 lg:px-8 overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative">
+        <div 
+          ref={heroRef} 
+          className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative transition-all duration-1000 ease-out ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           
           {/* Background watermark */}
           <div className="absolute left-0 top-0 opacity-5 pointer-events-none z-0 overflow-hidden w-full">
@@ -89,10 +131,10 @@ export default function Home() {
 
           {/* Right Image Composition (Responsive version) */}
           <div className="w-full lg:w-1/2 relative h-[320px] sm:h-[450px] lg:h-[500px] mt-6 lg:mt-0">
-             <div className="absolute right-0 top-0 w-[80%] h-[200px] sm:h-[280px] lg:h-[320px] bg-blue-100 rounded-lg overflow-hidden border-4 border-white shadow-xl rotate-2 z-10">
+             <div className="absolute right-0 top-0 w-[80%] h-[200px] sm:h-[280px] lg:h-[320px] bg-blue-100 rounded-lg overflow-hidden border-4 border-white shadow-xl rotate-2 z-10 transition-all duration-500 ease-out hover:scale-105 hover:-rotate-1 hover:z-30 cursor-pointer">
                 <img src="/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg" className="w-full h-full object-cover" alt={tHome('constructionImage1')} />
              </div>
-             <div className="absolute left-0 lg:left-auto lg:right-24 top-[100px] sm:top-[160px] lg:top-[180px] w-[80%] h-[200px] sm:h-[280px] lg:h-[320px] bg-gray-200 rounded-lg overflow-hidden border-4 border-blue-800 shadow-xl z-20">
+             <div className="absolute left-0 lg:left-auto lg:right-24 top-[100px] sm:top-[160px] lg:top-[180px] w-[80%] h-[200px] sm:h-[280px] lg:h-[320px] bg-gray-200 rounded-lg overflow-hidden border-4 border-blue-800 shadow-xl z-20 transition-all duration-500 ease-out hover:scale-105 hover:z-30 cursor-pointer">
                 <img src="/du-an-cau-tinh-huc.jpg" className="w-full h-full object-cover" alt={tHome('constructionImage2')} />
              </div>
           </div>
@@ -101,7 +143,10 @@ export default function Home() {
 
       {/* --- VỀ SÔNG HỒNG --- */}
       <section className="py-12 sm:py-16 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div 
+          ref={aboutRef}
+          className={`max-w-[1400px] mx-auto px-4 lg:px-8 transition-all duration-1000 ease-out delay-100 ${isAboutVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           <SectionTitle title={tAbout('title')} />
           
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mt-8 sm:mt-10">
@@ -120,7 +165,10 @@ export default function Home() {
 
       {/* --- LÝ DO NÊN CHỌN & HÌNH ẢNH --- */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 flex flex-col lg:flex-row gap-12">
+        <div 
+          ref={whyRef}
+          className={`max-w-[1400px] mx-auto px-4 lg:px-8 flex flex-col lg:flex-row gap-12 transition-all duration-1000 ease-out delay-100 ${isWhyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           {/* Lý do */}
           <div className="w-full lg:w-1/2">
             <SectionTitle title={tHome('whyChooseUs')} align="left" />
@@ -158,7 +206,10 @@ export default function Home() {
 
       {/* --- TIN TỨC NỔI BẬT --- */}
       <section className="py-12 sm:py-16 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div 
+          ref={newsRef}
+          className={`max-w-[1400px] mx-auto px-4 lg:px-8 transition-all duration-1000 ease-out delay-100 ${isNewsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           <SectionTitle title={tNews('title')} />
           
           <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -192,13 +243,16 @@ export default function Home() {
 
       {/* --- SLIDER DỰ ÁN NỔI BẬT --- */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div 
+          ref={projectsRef}
+          className={`max-w-[1400px] mx-auto px-4 lg:px-8 transition-all duration-1000 ease-out delay-100 ${isProjectsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           <SectionTitle title={tProjects('title')} />
           
           {/* Lưới Dự án đã thực hiện */}
           <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {projectItems.map((item, i) => (
-              <div key={i} className="aspect-video bg-gray-200 rounded-xl overflow-hidden shadow-lg relative group cursor-pointer border border-gray-100">
+              <Link href={`/${locale}/projects/${item.slug}`} key={i} className="block aspect-video bg-gray-200 rounded-xl overflow-hidden shadow-lg relative group cursor-pointer border border-gray-100">
                 <img 
                   src={item.src} 
                   className="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-in-out" 
@@ -208,7 +262,7 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 p-6 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                    <h3 className="text-white text-xl sm:text-2xl font-bold drop-shadow-md">{item.alt}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

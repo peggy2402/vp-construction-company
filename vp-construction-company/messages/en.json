@@ -145,7 +145,9 @@
     "project5Description": "The Vertex Plaza is a bustling commercial and entertainment center, attracting thousands of visitors daily. With high-end shops, diverse restaurants, and entertainment areas, Vertex Plaza is a must-visit destination.",
     "project6Description": "Serenity Gardens is a high-end residential area with modern villa and townhouse designs, set in a lush, tranquil green space. The project offers comfortable living and closeness to nature.",
     "projectTuyenQuangTitle": "Tuyen Quang - Ha Giang Expressway Project",
-    "projectTinhHucTitle": "Tinh Huc Bridge Project"
+    "projectTuyenQuangDesc": "The project involves the construction of an expressway connecting Tuyen Quang and Ha Giang, contributing to economic development and trade between the two provinces. The project includes components such as expressway roads, bridges, and traffic safety systems.",
+    "projectTinhHucTitle": "Tinh Huc Bridge Project",
+    "projectTinhHucDesc": "The Tinh Huc Bridge construction project is an important transportation structure, connecting neighboring areas, contributing to improving transportation infrastructure and promoting local economic development."
   },
   "News": {
     "title": "News & Updates",

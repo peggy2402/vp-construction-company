@@ -4,49 +4,44 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 type Props = {
-  params: { slug: string; locale: string };
+  params: Promise<{ slug: string; locale: string }>;
 };
 
 // Mock data for projects (in a real app, this would come from a database/CMS)
 const getProjectDetails = async (slug: string, locale: string) => {
   const projectsData = [
     {
-      slug: 'the-onyx-tower',
-      titleKey: 'project1Title',
-      descriptionKey: 'project1Description',
-      typeKey: 'Commercial',
-      mainImage: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop',
+      slug: 'du-an-cao-toc-tuyen-quang-ha-giang',
+      titleKey: 'projectTuyenQuangTitle',
+      descriptionKey: 'projectTuyenQuangDesc',
+      typeKey: 'Industrial',
+      mainImage: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg',
       gallery: [
-        'https://images.unsplash.com/photo-1506937510043-871b99b9e8a7?q=80&w=2070&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1523217592521-0492c24e2db1?q=80&w=2070&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop',
+        '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg',
       ],
       details: {
-        location: 'Trung tâm thành phố',
-        client: 'Tập đoàn ABC',
-        area: '50,000 m²',
-        year: '2023',
+        location: 'Tuyên Quang - Hà Giang',
+        client: 'Ban QLDA',
+        area: 'Quy mô lớn',
+        year: '2024',
       },
     },
     {
-      slug: 'lumina-residences',
-      titleKey: 'project2Title',
-      descriptionKey: 'project2Description',
-      typeKey: 'Residential',
-      mainImage: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200&auto=format&fit=crop',
+      slug: 'du-an-cau-tinh-huc',
+      titleKey: 'projectTinhHucTitle',
+      descriptionKey: 'projectTinhHucDesc',
+      typeKey: 'Commercial',
+      mainImage: '/du-an-cau-tinh-huc.jpg',
       gallery: [
-        'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1570129477490-ba5b66970172?q=80&w=2070&auto=format&fit=crop',
+        '/du-an-cau-tinh-huc.jpg',
       ],
       details: {
-        location: 'Khu đô thị mới',
-        client: 'Công ty Bất động sản XYZ',
-        area: '30,000 m²',
-        year: '2022',
+        location: 'Tuyên Quang',
+        client: 'UBND Tỉnh Tuyên Quang',
+        area: 'Quy mô lớn',
+        year: '2023',
       },
     },
-    // Add details for other projects here
   ];
 
   const projectData = projectsData.find(p => p.slug === slug);
@@ -64,7 +59,8 @@ const getProjectDetails = async (slug: string, locale: string) => {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = await getProjectDetails(params.slug, params.locale);
+  const { slug, locale } = await params;
+  const project = await getProjectDetails(slug, locale);
 
   if (!project) {
     return { title: 'Project Not Found' };
@@ -82,7 +78,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
-  const project = await getProjectDetails(params.slug, params.locale);
+  const { slug, locale } = await params;
+  const project = await getProjectDetails(slug, locale);
 
   if (!project) {
     notFound();
