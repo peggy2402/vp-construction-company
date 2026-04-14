@@ -167,5 +167,14 @@
   "Pagination": {
     "previous": "Trước",
     "next": "Sau"
+  },
+  "Docs": {
+    "title": "CÁC TÀI LIỆU LIÊN QUAN",
+    "docDegree": "BẰNG CẤP",
+    "docCalibration": "HIỆU CHUẨN THIẾT BỊ",
+    "docContract1": "HỢP ĐỒNG 1",
+    "docContract2": "HỢP ĐỒNG 2",
+    "docContract3": "HỢP ĐỒNG 3",
+    "download": "Tải xuống"
   }
 }

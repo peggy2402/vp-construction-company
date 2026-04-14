@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 
-
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Thêm state cho mobile menu
@@ -14,16 +13,27 @@ export default function Home() {
   const tProjects = useTranslations('Projects');
   const tFooter = useTranslations('Footer');
   const tNews = useTranslations('News');
+  const tDocs = useTranslations('Docs');
+  
   // Dữ liệu Dự án nổi bật
   const projectItems = [
     { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('projectTuyenQuangAlt'), slug: 'du-an-cao-toc-tuyen-quang-ha-giang' },
     { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('projectTinhHucAlt'), slug: 'du-an-cau-tinh-huc' }
   ];
 
-  // Dữ liệu Hình ảnh công trường (BẠN ĐỔI ẢNH THỨ 2 Ở ĐÂY NHÉ)
+  // Dữ liệu Hình ảnh công trường
   const constructionItems = [
     { src: '/du-an-cao-toc-tuyen-quang-ha-giang-giai-doan1.jpg', alt: tHome('constructionImage1') },
     { src: '/du-an-cau-tinh-huc.jpg', alt: tHome('constructionImage2') }
+  ];
+
+  // Dữ liệu Tài liệu liên quan (BẠN CÓ THỂ THÊM/SỬA LINK Ở ĐÂY)
+  const documentItems = [
+    { title: tDocs('docDegree'), type: 'PDF', size: '4363 KB', link: '/BANGCAP.pdf', iconColor: 'text-red-500' },
+    { title: tDocs('docCalibration'), type: 'PDF', size: '8143 KB', link: '/HIEUCHUANTHIETBI.pdf', iconColor: 'text-red-500' },
+    { title: tDocs('docContract1'), type: 'PDF', size: '3506 KB', link: '/HD1.pdf', iconColor: 'text-red-500' },
+    { title: tDocs('docContract2'), type: 'PDF', size: '3724 KB', link: '/HD2.pdf', iconColor: 'text-blue-500' },
+    { title: tDocs('docContract3'), type: 'PDF', size: '3719 KB', link: '/HD3.pdf', iconColor: 'text-blue-500' },
   ];
 
   // --- Scroll Animation Logic ---
@@ -31,12 +41,14 @@ export default function Home() {
   const aboutRef = useRef(null);
   const whyRef = useRef(null);
   const newsRef = useRef(null);
+  const docsRef = useRef(null); // Ref mới cho phần Tài liệu
   const projectsRef = useRef(null);
 
   const [isHeroVisible, setHeroVisible] = useState(false);
   const [isAboutVisible, setAboutVisible] = useState(false);
   const [isWhyVisible, setWhyVisible] = useState(false);
   const [isNewsVisible, setNewsVisible] = useState(false);
+  const [isDocsVisible, setDocsVisible] = useState(false); // State mới cho phần Tài liệu
   const [isProjectsVisible, setProjectsVisible] = useState(false);
 
   useEffect(() => {
@@ -48,6 +60,7 @@ export default function Home() {
             if (entry.target === aboutRef.current) setAboutVisible(true);
             if (entry.target === whyRef.current) setWhyVisible(true);
             if (entry.target === newsRef.current) setNewsVisible(true);
+            if (entry.target === docsRef.current) setDocsVisible(true); // Cập nhật state khi scroll tới
             if (entry.target === projectsRef.current) setProjectsVisible(true);
             observer.unobserve(entry.target);
           }
@@ -56,7 +69,7 @@ export default function Home() {
       { threshold: 0.1 }
     );
 
-    [heroRef, aboutRef, whyRef, newsRef, projectsRef].forEach(
+    [heroRef, aboutRef, whyRef, newsRef, docsRef, projectsRef].forEach(
       (ref) => ref.current && observer.observe(ref.current)
     );
 
@@ -241,8 +254,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* --- CÁC TÀI LIỆU LIÊN QUAN (MỚI BỔ SUNG) --- */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div 
+          ref={docsRef}
+          className={`max-w-[1400px] mx-auto px-4 lg:px-8 transition-all duration-1000 ease-out delay-100 ${isDocsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          <SectionTitle title={tDocs('title')} />
+          
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {documentItems.map((doc, i) => (
+              <a href={doc.link} key={i} className="flex flex-col items-center p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-blue-300 transition-all group">
+                <div className="w-16 h-16 mb-4 flex items-center justify-center bg-gray-50 rounded-full group-hover:bg-blue-50 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-8 h-8 ${doc.iconColor}`}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                </div>
+                <h3 className="font-bold text-gray-800 text-center mb-2 line-clamp-2">{doc.title}</h3>
+                <div className="mt-auto flex items-center gap-2 text-sm text-gray-500">
+                  <span className="font-medium bg-gray-100 px-2 py-1 rounded">{doc.type}</span>
+                  <span>•</span>
+                  <span>{doc.size}</span>
+                </div>
+                <div className="mt-4 text-blue-600 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                  {tDocs('download')} 
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* --- SLIDER DỰ ÁN NỔI BẬT --- */}
-      <section className="py-12 sm:py-16">
+      <section className="py-12 sm:py-16 bg-gray-50 border-t border-gray-200">
         <div 
           ref={projectsRef}
           className={`max-w-[1400px] mx-auto px-4 lg:px-8 transition-all duration-1000 ease-out delay-100 ${isProjectsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
