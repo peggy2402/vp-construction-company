@@ -164,10 +164,11 @@ export default function About() {
             {/* Certificates */}
             <div className="mb-16">
               <h4 className="text-xl text-[#D4AF37] font-serif mb-8 text-center">{t('certSubtitle')}</h4>
+              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Ảnh Chứng chỉ */}
                 {[
                   { src: '/CC-ISO-NGUYENDINHHANH.jpg', alt: t('certHanh') },
-                  { src: '/CC-ISO-NGUYENNHUCANH.jpg', alt: t('certCanh') },
                   { src: '/CC-ISO-Thong2.jpg', alt: t('certThong') },
                 ].map((cert, idx) => (
                   <div key={idx} className="group relative aspect-[3/4] overflow-hidden rounded-sm border border-white/10 bg-zinc-800">
@@ -177,6 +178,29 @@ export default function About() {
                     </div>
                   </div>
                 ))}
+
+                {/* File DOCX: Công bố năng lực (Thay thế cho ảnh đã xóa) */}
+                <a 
+                  href="/GCN-LAS 40.009 - mới.docx" 
+                  download
+                  className="group relative aspect-[3/4] overflow-hidden rounded-sm border-2 border-dashed border-[#D4AF37]/50 bg-zinc-800/50 hover:bg-zinc-800 transition-colors duration-500 flex flex-col items-center justify-center p-6 text-center cursor-pointer"
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+                    className="w-16 h-16 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform duration-500"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  <h5 className="text-white font-bold mb-3 uppercase tracking-wider text-base">GCN LAS 40.009</h5>
+                  <p className="text-zinc-400 text-sm font-serif leading-relaxed mb-6">
+                    Công bố thông tin về<br/>năng lực hoạt động thí nghiệm<br/>chuyên ngành xây dựng
+                  </p>
+                  <span className="inline-block text-xs font-semibold text-zinc-900 bg-[#D4AF37] px-4 py-2 rounded-sm group-hover:bg-[#f2ce5e] transition-colors duration-300">
+                    TẢI XUỐNG (.DOCX)
+                  </span>
+                </a>
+
               </div>
             </div>
 
