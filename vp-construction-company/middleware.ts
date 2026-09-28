@@ -9,6 +9,6 @@ export default createMiddleware({
 });
 
 export const config = {
-  // Bỏ qua tất cả các đường dẫn không cần quốc tế hóa (API, file tĩnh, ảnh,...)
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  // Bỏ qua tất cả các đường dẫn không cần quốc tế hóa (API, file tĩnh, ảnh, hệ thống Vercel)
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

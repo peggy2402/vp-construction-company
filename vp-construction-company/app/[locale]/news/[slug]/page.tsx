@@ -74,8 +74,8 @@ export default async function NewsArticlePage({ params }: Props) {
     author: 'Hoang Anh Group', // This could also be dynamic
     publishedDate: new Date().toLocaleDateString('vi-VN'),
     content: `
-      <p>Đây là đoạn mở đầu cho bài viết về <strong>${params.slug}</strong>. Nội dung này sẽ được lấy từ một CMS hoặc database trong một ứng dụng thực tế.</p>
-      <p>Trong một ứng dụng thực tế, bạn sẽ sử dụng slug "${params.slug}" để truy vấn cơ sở dữ liệu và lấy ra nội dung bài viết tương ứng, bao gồm cả văn bản, hình ảnh, và các định dạng khác.</p>
+      <p>Đây là đoạn mở đầu cho bài viết về <strong>${slug}</strong>. Nội dung này sẽ được lấy từ một CMS hoặc database trong một ứng dụng thực tế.</p>
+      <p>Trong một ứng dụng thực tế, bạn sẽ sử dụng slug "${slug}" để truy vấn cơ sở dữ liệu và lấy ra nội dung bài viết tương ứng, bao gồm cả văn bản, hình ảnh, và các định dạng khác.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.</p>
       <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=2070&auto=format&fit=crop" alt="Article image" class="my-8 rounded-md" />
       <h2>Một tiêu đề phụ</h2>
