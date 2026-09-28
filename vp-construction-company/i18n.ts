@@ -4,13 +4,16 @@ import {getRequestConfig} from 'next-intl/server';
 // Danh sách các ngôn ngữ
 const locales = ['en', 'vi'];
 
-export default getRequestConfig(async ({locale}) => {
-  // Xác thực tham số `locale`
-  const currentLocale = (locale as string) || 'en';
-  if (!locales.includes(currentLocale)) notFound();
+export default getRequestConfig(async ({requestLocale}) => {
+  let locale = await requestLocale;
+
+  // Nếu locale không hợp lệ hoặc chưa có, fallback về ngôn ngữ mặc định
+  if (!locale || !locales.includes(locale)) {
+    locale = 'vi';
+  }
 
   return {
-    locale: currentLocale,
-    messages: (await import(`./messages/${currentLocale}.json`)).default
+    locale,
+    messages: (await import(`./messages/${locale}.json`)).default
   };
 });
