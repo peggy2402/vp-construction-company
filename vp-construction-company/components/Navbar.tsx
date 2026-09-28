@@ -102,7 +102,8 @@ export const Navbar = () => {
               alt="Hoang Anh Trading & Construction JSC Logo"
               width={150}
               height={40}
-              className="hidden md:block object-contain h-auto transition-all duration-300"
+              style={{ height: 'auto' }}
+              className="hidden md:block object-contain transition-all duration-300"
               priority
             />
             <div className="flex flex-col font-bold leading-tight transition-colors duration-300 text-zinc-900">

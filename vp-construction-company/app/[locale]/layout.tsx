@@ -91,8 +91,9 @@ export default async function RootLayout({
       // Sửa: Sử dụng ${inter.variable} và ${lora.variable}
       // antialiased để typo sắc nét hơn
       className={`${inter.variable} ${lora.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-zinc-900 text-white font-sans">
+      <body className="min-h-full flex flex-col bg-zinc-900 text-white font-sans" suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages}>
           
           {/* NAVBAR CHUNG CHO TẤT CẢ CÁC TRANG */}
